@@ -1,0 +1,271 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-09-18}
+
+\subsection{Globala extremvärden (forts.)}
+Om \(
+    f(x,y) 
+\) har ett globalt max-/min-värde i \(
+    (a,b) \in D
+\) och \(
+    (a,b)
+\) inte är en randpunkt måste den vara ett lokalt min/max och därmed också
+en kritisk punkt (om \(
+    f
+\) är deriverbar i \(
+    (a,b)
+\)). 
+
+\subsubsection{Metod för att bestämma globala max/min}
+Låt \(
+    f
+\) vara en deriverbar funktion på \(
+    D \subseteq \realn^2
+\) där \(
+    D
+\) är sluten och begränsad. 
+
+Globala max och min fås genom att jämföra funktionsvärden i följande 
+kandidater:
+\begin{enumerate}
+    \item Kritiska punkter i \(
+        D
+    \) 
+    \item Randpunkter till \(
+        D
+    \) 
+\end{enumerate}
+
+Om man parametriserar randpunkterna till \(
+    D
+\) med ett antal kurvor räcker det med följande kandidater i punkt \(
+    2
+\) ovan: 
+
+\begin{enumerate}
+    \item[2.1.] Kritiska punkter när man ser \(
+        f
+    \) som en funktion av en variabel längs randkurvor
+    \item[2.2.] \enquote{Hörn}, d.v.s.\ ändpunkter till randkurvorna
+\end{enumerate}
+
+\begin{ex}
+    Beräkna de globala max-/min-punkterna till funktionen \(
+        f(x,y) = x^2+y^2-y
+    \) på området \(
+        D = \{(x,y) | x^2+y^2 \leq 1, y \geq 0\}
+    \).
+
+    Området är en halvcirkelskiva som ganska uppenbart är sluten och begränsad.
+    
+    \f 
+
+    Vi börjar med att leta kritiska punkter: \(
+        \left\{\begin{matrix}
+            f_x = 2x = 0\\ 
+            f_y = 2y-1 = 0
+        \end{matrix}\right. \iff (x,y) = (0; 0,5)
+    \). Nu får vi kolla om den kritiska punkten ligger i \(
+        D
+    \). \(
+        0^2+{(0,5)}^2 = 0,25 \leq 1 \text{ och } 0,5 \geq 0
+    \), så den ligger i \(
+        D
+    \). \(
+        f(0; 0,5) = -\inv{4}
+    \). 
+
+    Nu ska vi titta på randpunkter, så vi börjar med att parametrisera randen.
+    Vi delar upp det i det raka strecket (\(
+        C_1
+    \)) och i halvcirkelbågen (\(
+        C_2
+    \)) för enkelhetens 
+    skull. 
+
+    \(
+        C_1: \ve{r}_1 (t) = \lang t, 0\rang 
+    \) där \(
+        -1 \leq t \leq 1
+    \).
+
+    \(
+        C_2: \ve{r}_2 (t) = \lang \cos(t), \sin(t) \rang
+    \) där \(
+        0 \leq t \leq \pi
+    \).
+
+    Då tittar vi på kritiska punkter för randkurvorna, och vi börjar med \(
+        C_1
+    \). \(
+        g_1(t) = f(\ve{r}_1(t)) = f(t, 0) = t^2
+    \). Kritiska punkter för \(
+        g_1
+    \) är då \(
+        g_1'(t) = 0 \iff t = 0
+    \). Det ger kandidaten \(
+        g_1(0) = f(0,0) = 0
+    \). Nu kör vi på \(
+        C_2
+    \). \(
+        g_2(t) = f(\ve{r}_2(t)) = f(\cos(t), \sin(t)) = 
+        \cos^2(t) + \sin^2(t) - \sin(t) = 1 - \sin(t)
+    \). Kritiska punkter är då \(
+        g_2'(t) = -\cos(t) = 0 \iff t = \frac{\pi}{2}
+    \) (Fler punkter egentligen, men den här är den enda i vårt tillåtna 
+    intervall). Kandidaten är då \(
+        g_2(\frac{\pi}{2}) = f(0,1) = 0
+    \).
+
+    Nästa steg är att titta på \enquote{hörnen} \(
+        (-1, 0) 
+    \) och \(
+        (1,0)
+    \). \(
+        f(-1, 0) = {(-1)}^2 + 0^2 - 0 = 1
+    \) och \(
+        f(1,0) = 1^2+0^2-0 = 1
+    \). 
+
+    Allt som allt är vårt globala max \(
+        (\pm 1, 0)
+    \) och vårt globala min \(
+        (0; 0,5)
+    \).
+\end{ex}
+
+\subsection{Optimering under bivillkor och Lagrangemultiplikatorer (14.8)}
+Vi vill lösa följande slags problem: 
+Beräkna max av \(
+    4x^2+4y
+\) när \(
+    (x,y)
+\) ligger på enhetscirkeln \(
+    x^2+y^2=1
+\). En möjlighet är att parametrisera enhetscirkeln, t.ex.\ med \(
+    \ve{r} (t) = \lang \cos t, \sin t \rang
+\) när \(
+    0 \leq t \leq 2\pi 
+\) och hitta max av \(
+    g(t) = f(\ve{r} (t)) = 4\cos^2(t)+4\sin(t)
+\) som vanligt.
+
+En annan möjlighet är att se det som ett fall av optimering under bivillkor.
+Låt \(
+    f(x,y), g(x,y)
+\) vara definierade på någon mängd \(
+    D
+\). Vi vill hitta max och min av \(
+    f(x,y)
+\) på \(
+    D
+\) under förutsättning att \(
+    g(x,y) = k
+\) där \(
+    k
+\) är konstant. Villkoret \(
+    g(x,y) = k
+\) kallas för \emph{bivillkor (constraint)}.
+
+\subsubsection{Metoden med Lagrangemultiplikatorer} 
+För att hitta max och min till \(
+    f(x,y)
+\) under bivillkoret \(
+    g(x,y) = k
+\) (under förutsättning att extremvärden finns och \(
+    \nabla g(x,y) \neq 0
+\) på \(
+    g(x,y) = k
+\)) gör man följande:
+
+\begin{enumerate}
+    \item[a)] Hitta alla lösningar \(
+        (x,y)
+    \) till 
+    \(
+        \left\{\begin{matrix}
+            \nabla f(x,y) = \lambda \cdot \nabla g(x,y) \\ 
+            g(x,y) = k
+        \end{matrix}\right.
+    \) för något \( 
+        \lambda
+    \) (\(
+        \lambda
+    \) kallas för Lagrangemultiplikator).
+
+    \item[b)] Jämför \(
+        f(x,y)
+    \) för alla lösningar \(
+        (x,y)
+    \) från punkt a. Det största värdet ger max och det minsta ger min.
+\end{enumerate}
+
+\begin{anm}
+    Förutsättningen att extremvärden finns är uppfylld om \(
+        \{g(x,y) = k\} 
+    \) är sluten och begränsad. I kursen kommer vi bara att studera problem där
+    extremvärden existerar.
+\end{anm}
+
+\begin{ex}
+    Hitta max och min till \(
+        f(x,y) = 4x^2+4y
+    \) under bivillkoret \(
+        g(x,y) = x^2+y^2 = 1
+    \).
+
+    Enligt metoden ska vi då lösa ekvationssystemet 
+    \(
+        \left\{\begin{matrix}
+            \nabla f = \lambda \cdot \nabla g\\ 
+            g = 1
+        \end{matrix}\right. 
+        \iff 
+        \left\{\begin{matrix}
+            f_x = \lambda \cdot g_x \\
+            f_y = \lambda \cdot g_y \\ 
+            g^2+y^2 = 1
+        \end{matrix}\right.
+        \iff 
+        \left\{\begin{matrix}
+            8x = \lambda \cdot 2x \\
+            4 = \lambda \cdot 2y \\
+            x^2+y^2 = 1
+        \end{matrix}\right.
+    \) Den första ekvationen ger \(
+        8x = \lambda \cdot 2x \iff 4x = \lambda x \iff x = 0 \text{ el. } \lambda = 4 
+    \). Första fallet (\(
+        x=0
+    \)) ger genom ekvation 3 \(
+        y^2 = 1 \iff y = \pm 1
+    \) vilket med ekvation 2 ger \(
+        \lambda = \frac{4}{2y} = \pm 2
+    \). Här får vi komma ihåg att det ger två lösningar \(
+        (x,y,\lambda) = (0,1,2) \text{ och } (0,-1,-2)
+    \). Andra fallet ger genom ekvation 2 \(
+        4 = 4 \cdot 2 \cdot y \iff y = \half
+    \). Ekvation 3 ger då \(
+        x^2 = 1 - \inv{4} =\frac{3}{4} \iff x = \pm \frac{\sqrt{3}}{2}
+    \). Vi kontrollerar att det ger de två lösningarna \(
+        (x,y,\lambda) = (\pm \frac{\sqrt{3}}{2}, \half, 4) 
+    \). Med det får vi följande lösningar till det ursprungliga problemet:
+    \begin{align*}
+        f(0,1) &= 4 \\
+        f(0,-1) &= -4 \\
+        f(\frac{\sqrt{3}}{2}, \half) &= 4 \cdot \frac{3}{4} + 4 \cdot \half = 5 \\
+        f(\frac{-\sqrt{3}}{2}, \half) &= 5 
+    \end{align*}
+    Alltså har vi ett max på \(
+        5
+    \) i \(
+        (\pm\frac{\sqrt{3}}{2}, \half)
+    \) och ett min på -4 i \(
+        (0, -1)
+    \).
+\end{ex}
+
+\end{document} 

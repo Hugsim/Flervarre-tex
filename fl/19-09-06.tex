@@ -1,0 +1,215 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-09-06}
+
+\subsection{Gränsvärden i flera variabler (14.2)}
+\begin{defn}[Gränsvärden i flera variabler (Formell)]
+    En funktion \(
+        f(x,y) 
+    \) har \emph{gränsvärde} \(
+        L
+    \) när \(
+        (x,y)
+    \) går mot \(
+        (a,b)
+    \), vilket skrivs \(
+        \lim_{(x,y) \to (a,b)} f(x,y) = L
+    \), om \(
+        \forall \epsilon > 0, \exists \delta > 0 \text{ s.a.\ om } 
+        0 < \abs{(x,y) - (a,b)} = \sqrt{{(x-a)}^2 + {(y-b)}^2} < \delta  
+    \) så är \(
+        \abs{f(x,y) - L } < \epsilon
+    \).
+\end{defn}
+
+\begin{defn}[Gränsvärden i flera variabler (Informell)]
+    \(
+        f(x,y) 
+    \) är hur nära \(
+        L
+    \) som helst så länge \(
+        (x,y)
+    \) är tillräckligt nära \(
+        (a,b)
+    \). Liknande, men mer oprecist: \(
+        f(x,y)
+    \) närmar sig \(
+        L
+    \) när \(
+        (x,y)
+    \) närmar sig \(
+        (a,b)
+    \).
+\end{defn}
+
+\subsubsection{Räkneregler}
+Anta \(
+    \lim_{(x,y)\to (a,b)} f(x,y) = L
+\) och \(
+    \lim_{(x,y)\to (a,b)} g(x,y) = M
+\). Då gäller 
+\begin{align*}
+    \lim_{(x,y)\to (a,b)} f(x,y) + g(x,y) &= L + M \\
+    \lim_{(x,y)\to (a,b)} f(x,y)\cdot g(x,y) &= L \cdot M \\
+    \lim_{(x,y)\to (a,b)} \bif{f(x,y)}{g(x,y)} &= \bif{L}{M} \text{ (Endast om } g(x,y) \neq 0\text{)} \\
+    \lim_{(x,y)\to (a,b)} x &= a \\
+    \lim_{(x,y)\to (a,b)} y &= b 
+\end{align*}
+Om \(
+    h(t)
+\) en funktion och \(
+    \blim_{t \to L} h(t) = K
+\) så är \[
+    \lim_{(x,y)\to (a,b)} h(f(x,y)) = K.
+\]
+
+Instängningsregeln/Squeeze theorem: Om \(
+    \forall x, y: f(x,y) \leq g(x,y) \leq h(x,y)
+\) och \(
+    \lim_{(x,y)\to (a,b)} f(x,y) = L = \lim_{(x,y)\to (a,b)} h(x,y)
+\) gäller \[
+    \lim_{(x,y)\to (a,b)} g(x,y) = L.
+\] 
+
+\begin{ex}
+    Beräkna \(
+        \lim_{(x,y)\to (0,0)} \bif{x^4-y^4}{x^2+y^2} 
+    \) om det existerar. 
+    
+    Naivt kan man säga \(
+        \lim_{(x,y)\to (a,b)} x^2+y^2 = 0^2+0^2 = 0
+    \) och därmed anta att gränsvärdet inte existerar.
+    Dock kan vi förenkla 
+    \begin{align*}
+        & \lim_{(x,y)\to (0,0)} \bif{x^4-y^4}{x^2+y^2} \\
+       =& \lim_{(x,y)\to (0,0)} \bif{(x^2+y^2)(x^2-y^2)}{x^2+y^2} \\
+       =& \lim_{(x,y)\to (0,0)} x^2-y^2 \\
+       =& 0^2 - 0^2 \\
+       =& 0.
+    \end{align*}
+\end{ex}
+
+\begin{ex}
+    Visa att \(
+        \lim_{(x,y)\to (0,0)} \bif{x^2y^2}{x^2+y^2} = 0 
+    \). 
+
+    Inse först att \(
+        \forall x, y: 0 \leq \bif{x^2y^2}{x^2+y^2} \text{ och } \bif{x^2y^2}{x^2+y^2} = y^2 \bif{x^2}{x^2+y^2} \leq y^2 \bif{x^2+y^2}{x^2+y^2} = y^2
+    \). Enligt instängingsregeln är \(
+        \lim_{(x,y)\to (0,0)} \bif{x^2y^2}{x^2+y^2} = 0
+    \) eftersom \(
+        0 \leq \bif{x^2y^2}{x^2+y^2} \leq y^2
+    \) och \(
+        \lim_{(x,y)\to (0,0)} 0 = \lim_{(x,y)\to (0,0)} y^2 = 0
+    \).
+\end{ex}
+
+\begin{ex}
+    Låt \(
+        g(x,y) = \bif{\ln(x^2+y^2)}{x^2+y^2-1} 
+    \). Beräkna \(
+        \lim_{(x,y) \to (0,1)} g(x,y)
+    \) om det existerar.
+
+    Om \(
+        f(x,y) = x^2+y^2
+    \) och \(
+        h(t) = \bif{\ln(t)}{t-1} 
+    \) så är \(
+        g(x,y) = h(f(x,y))
+    \). Eftersom \(
+        \lim_{(x,y) \to (0,1)} f(x,y) = 0^2 + 1^2 = 1
+    \) får vi \(
+        \lim_{(x,y) \to (0,1)} g(x,y) = \lim_{t \to 1} h(t) 
+        = \lim_{t \to 1} \bif{\ln(t)}{t-1} = 1
+    \). Sista steget är ett standardgränsvärde eller går att räkna 
+    ut med l'Hospitals regel. 
+\end{ex}
+
+Om \(
+    \lim_{(x,y) \to (a,b)} f(x,y) = L
+\) måste gränsvärdet av \(
+    f
+\) när man närmar sig punkten \(
+    (a,b)
+\) längs alla räta linjer genom \(
+    (a,b)
+\) vara \(
+    L
+\). Sådana räta linjer ges av \(
+    \ve{r} (t) = \lang a+kt, b+lt \rang 
+\). \(
+    \ve{r} (t) \text{ går mot } (a,b) \text{ när } t \to 0
+\). Detta ger en metod för att se när gränsvärden inte existerar
+och vad gränsvärdet måste vara om det existerar,
+men inte att det existerar.
+
+\begin{ex}
+    Beräkna \(
+        \lim_{(x,y) \to (0,0)} \bif{x^2-y^2}{x^2+y^2} 
+    \) om det existerar.
+
+    Låt \(
+        f(x,y) = \bif{x^2-y^2}{x^2+y^2}
+    \). Vi prövar vad som händer när \(
+        (x,y) \to (0,0)
+    \) längs \(
+        x
+    \)-axeln och \(
+        y
+    \)-axeln.
+
+    \(
+        x
+    \)-axeln: \(
+        \ve{r}_1 (t) = \lang t, 0\rang \to \lang 0, 0\rang \text{ när } t \to 0
+    \). \(
+        f(\ve{r}_1(t) ) = f(t,0) = \bif{t^2-0^2}{t^2+0^2} = 1 \text{ när } t \to 0
+    \).
+
+    \(
+        y
+    \)-axeln: \(
+        \ve{r}_2 (t) = \lang  0, t \rang \to \lang 0, 0\rang \text{ när } t \to 0
+    \). \(
+        f(\ve{r}_2(t) ) = f(0,t) = \bif{0^2-t^2}{0^2+t^2} = -1 \text{ när } t \to 0
+    \). 
+
+    Eftersom dessa gränsvärden är olika existerar inte gränsvärdet 
+    för \(
+        f(x,y)
+    \).
+\end{ex}
+
+\subsection{Kontinuitet}
+\begin{defn}[Kontinuitet i en punkt]
+    En funktion \(
+        f(x,y)
+    \) är \emph{kontinuerlig} i en punkt \(
+        (a,b)
+    \) om \(
+        \lim_{(x,y) \to (a,b)} f(x,y) = f(a,b)
+    \).
+\end{defn}
+
+\begin{defn}[Kontinuitet på ett område]
+    \(
+        f
+    \) är kontinuerlig på ett område \(
+        D \subseteq \RR^2
+    \) om \(
+        f
+    \) är kontinuerlig på alla punkter \(
+        (a,b) \in D
+    \). Man säger att \(
+        f
+    \) är kontinuerlig om den är kontinuerlig för alla punkter i
+    sin definitionsmängd.
+\end{defn}
+
+\end{document}

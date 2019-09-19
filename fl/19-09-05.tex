@@ -1,0 +1,190 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-09-05}
+
+\subsection{Funktioner av flera variabler (14.1)}
+\begin{defn}[Funktioner av två variabler, definitionsmängd och värdemängd]
+    En (reellvärd) \emph{funktion av två variabler} är en regel 
+    som för varje \(
+        (x,y) \in D \subseteq \mathbb{R}^2
+    \) ger ett reellt tal \(
+        f(x,y)
+    \). \(
+        D 
+    \) kallas för \emph{definitionsmängd} (domain) till \(
+        f
+    \) och \(
+        \left\{f(x,y) | (x,y) \in D\right\}
+    \) kallas \emph{värdemängden} (range) till \(
+        f
+    \). Skriver \(
+        f : D \to \RR
+    \). 
+\end{defn}
+
+\begin{ex}
+    Mest grundläggande: koordinatfunktionerna \(
+        x
+    \) och \(
+        y
+    \).
+\end{ex}
+
+\begin{ex}
+    Om \(
+        f(x,y), g(x,y)
+    \) är funktioner kan vi skapa nya funktioner: 
+    \begin{align*}
+        &f(x,y)+g(x,y) \\
+        &f(x,y)\cdot g(x,y) \\
+        &\bif{f(x,y)}{g(x,y)} (\text{Endast definierad där } g(x,y) \neq 0) \\
+        &\sin(f(x,y))\dots \\
+        &\sqrt{f(x,y)}, \ln(f(x,y)), \dots (\text{Endast definierad där } f(x,y) \geq 0 \text{ respektive }  f(x,y) > 0)
+    \end{align*}
+\end{ex}
+
+\begin{defn}[Graf]
+    \emph{Grafen} till \(
+        f: D \to \RR, D \subseteq \RR^2
+    \) är alla \(
+        (x,y,z) \in \RR^3
+    \) s.a.\ \(
+        z = f(x,y), (x,y) \in D
+    \).
+\end{defn}
+
+\begin{ex}
+    Rita grafen till \(
+        f(x,y) = x+y
+    \).
+
+    Provar att rita längs några räta linjer:
+
+    \(
+        f(x,0) = x, f(x,1) = x+1, f(x,2) = x+2
+    \) 
+
+    \(
+        f(0,y) = y, f(1,y) = y+1, f(2,y) = y+2
+    \) 
+    \f
+\end{ex}
+
+\subsection{Annat sätt att visualisera en funktion}
+\begin{defn}[Nivåkurva]
+    En \emph{nivåkurva} till en funktion \(
+        f(x,y)
+    \) består av alla punkter \(
+        (x,y)
+    \) s.a.\ \(
+        f(x,y) = k 
+    \) för ett givet värde \(
+        k \in \RR
+    \). 
+\end{defn}
+
+Ritar man nivåkurvor för olika värden på \(
+    k
+\) får man en \emph{höjdkarta} (contour map) som kan användas
+för att bättre förstå funktionen.
+
+Beskriv nivåkurvorna och rita höjdkartor för olika funktioner.
+\begin{ex}
+    \(
+        f(x,y) = x+2y
+    \) 
+
+    \(
+        f(x,y) = x+2y = k \iff y = -\bif{x}{2}  + \bif{k}{2} 
+    \) vilket är en rät linje med lutning \(
+        -\half
+    \)  som skär \(
+        y
+    \)-axeln i \(
+        \frac{k}{2} 
+    \).
+    \f
+\end{ex}
+\begin{ex}
+    \(
+        f(x,y) = x^2+y^2
+    \) 
+
+    \(
+        f(x,y) = x^2+y^2 = k 
+    \) ger att om \(
+        k < 0
+    \) har vi en tom nivåkurva. Anta dock \(
+        k \geq 0
+    \), då är \(
+        x^2+y^2 = k = \left(\sqrt{k}\right)^2
+    \) vilket är en cirkel med radie \(
+        \sqrt{k}
+    \) och origo i \(
+        (0,0)
+    \).
+    \f
+\end{ex}
+\begin{ex}
+    \(
+        f(x,y) = e^{xy}
+    \) 
+
+    \(
+        f(x,y) = e^{xy} = k
+    \) ger att om \(
+        k \leq 0
+    \) har vi en tom nivåkurva. Anta dock \(
+        k > 0
+    \), då får vi \(
+        e^{xy} = k \iff
+        xy = \ln(k) 
+    \). Nu har vi två fall, 
+    om \(
+        x \neq 0 
+    \) får vi \(
+        y = \frac{\ln(k)}{x}
+    \) och om \(
+        x = 0 
+    \) får vi \(
+        0 = \ln(k) \iff k = 1
+    \).
+
+    \f
+\end{ex}
+
+\subsection{Funktioner av tre variabler}
+Kan på liknande sätt studera funktioner av tre variabler \(
+    f(x,y,z)
+\). Dock befinner sig dess graf \(
+    w = f(x,y,z)
+\) i ett rum med fyra dimensioner vilket är lite svårt att rita.
+Däremot är nivåytor \(
+    f(x,y,z) = k
+\) fortsatt användbara och kan visualiseras i vissa enkla fall.
+
+\begin{ex}
+    Beskriv nivåkurvorna till \(
+        f(x,y,z) = x^2+y^2+z^2
+    \).
+
+    \(
+        f(x,y,z) = x^2+y^2+z^2 = \left(\sqrt{x^2+y^2+z^2}\right)^2 
+    \) vilket är avståndet från punkten \(
+        (x,y,z)
+    \) till origo i kvadrat. Då får vi att nivåytorna för varje \(
+        k
+    \) är antingen tom om \(
+        k < 0
+    \) och sfären med radie \(
+        \sqrt{k}
+    \) och centrum i origo om \(
+        k \geq 0
+    \).
+\end{ex}
+
+\end{document}

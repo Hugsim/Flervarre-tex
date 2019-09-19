@@ -1,0 +1,261 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-09-12}
+
+\subsection{Tangentplan}
+\[
+    z = f(a,b) + f_x(a,b)(x-a)+f_y(a,b)(y-b)
+\] 
+
+\begin{ex}[Tangentplan]
+    Beräkna tangentplanet till \(
+        z = f(x,y) = \sqrt{x^2+y^2}
+    \) i punkten \(
+        (3,4)
+    \). Bestäm också lineariseringen av \(
+        f
+    \) i \(
+        (3,4)
+    \) och använd den för att approximera \(
+        f(3,01; 3,98)
+    \).
+
+    Vi börjar med att räkna ut \(
+        f(3,4) = \sqrt{3^2+4^2} = \sqrt{25} = 5
+    \). Vi behöver också de partiella derivatorna till \(
+        f
+    \) och deras värden i \(
+        (3,4)
+    \): \(
+        f_x = \bif{2x}{2\sqrt{x^2+y^2}} 
+    \), \(
+        f_x(3,4) = \bif{3}{5} 
+    \), \(
+        f_y = \bif{2y}{2\sqrt{x^2+y^2}} 
+    \) och \(
+        f_y(3,4) = \bif{4}{5} 
+    \). 
+
+    Tangentplanet är då \[
+        z = 5 + \bif{3}{5} (x-3) + \bif{4}{5} (y-4).
+    \] 
+    \(
+        L(x,y) = 5 + \bif{3}{5} (x-3) + \bif{4}{5} (y-4).
+    \) är lineariseringen av \(
+        f
+    \). Det är en approximation nära \(
+        (3,4)
+    \). 
+
+    Vi ska uppskatta \(
+        f(3,01; 3,98) \approx L(3,01; 3,98) = 5 + \frac{3}{5} (3,01-3) + \frac{4}{5} (3,98-4) 
+        = 5 + \frac{3}{5} \cdot 0,01 + \frac{4}{5} \cdot (-0,02) = 4,99
+    \). Det verkliga värdet \(
+        f(3,01; 3,98) = 4,990040\dots
+    \) vilket är en rätt bra approximation.
+\end{ex}
+
+\subsection{Differentierbarhet (14.4)}
+\subsubsection{En variabel}
+I en variabel gäller att om \(
+    f'(a)
+\) existerar kan man visa (finns i föreläsningsanteckningarna) att \(
+    f(x) = L(x) + \epsilon(x)(x-a)
+\) där \(
+    L(x) = f(a) + f'(a)(x-a)
+\) och \(
+    \epsilon(x) \to 0 \text{ när } x \to a
+\). Det säger att om \(
+    f'(a)
+\) existerar är \(
+    L
+\) en bra approximation av \(
+    f
+\) nära \(
+    a
+\) för \(
+    f(x) \to 0 
+\) snabbare än alla linjära funktioner/förstagradspolynom (Och \(
+    L
+\) är den enda linjära funktionen som uppfyller detta, alltså är \(
+    L
+\) den \enquote{bästa} approximationen av \(
+    f
+\) med en linjär funktion.)
+
+\subsubsection{Fler variabler}
+\begin{ex}
+    Låt \(
+        f(x) = \bif{xy}{x^2+y^2} \text{ om } (x,y) \neq (0,0)\text{, } 0 \text{ annars.}  
+        f(0,0) = 0
+    \), \(
+        f_x(0,0) = 0
+    \) och \(
+        f_y(0,0) = 0
+    \). Dess linearisering kring \(
+        (0,0)
+    \) är då \(
+        L(x,y) = 0
+    \). Vi kollar exempelvis längs linjen \(
+        f(t,t)
+    \). \(
+        f(t,t) - L(t,t) = \bif{t^2}{t^2+t^2} - 0 = \half \not\to 0
+    \), alltså är \(
+        L
+    \) inte en bra approximation av \(
+        f
+    \) nära \(
+        (0,0)
+    \) trots att de partiella derivatorna existerar i den punkten.
+\end{ex}
+
+Många resultat bygger på att \(
+    L
+\) är en bra approximation av \(
+    f
+\). Vi inför därför följande definition: 
+\begin{defn}[Deriverbarhet/Differentierbarhet]
+    \(
+        f(x,y)
+    \) är \emph{deriverbar} eller \emph{differentierbar} i \(
+        (a,b)
+    \) om \(
+        f_x(a,b)
+    \) och \(
+        f_y(a,b)
+    \) existerar och \(
+        f(x,y) = f(a,b) + f_x(a,b)(x-a) + f_y(a,b) (y-b) + 
+        \epsilon_1(x,y)(x-a) + \epsilon_2(x,y)(y-b)
+    \) där \(
+        \epsilon_1, \epsilon_2 \to 0 \text{ när } (x,y) \to (a,b).
+    \) Speciellt innebär det att \(
+        f(x,y) - L(x,y) \to 0 \text{ när } (x,y) \to (a,b).
+    \) 
+\end{defn}
+
+\begin{sats}[Kontinuitet och deriverbarhet]
+    Om \(
+        f_x(x,y)
+    \) och \(
+        f_y(x,y)
+    \) existerar och är kontinuerliga nära \(
+        (a,b)
+    \) är \(
+        f
+    \) deriverbar i \(
+        (a,b)
+    \).
+
+    \begin{proof}
+        Beviset använder medelvärdessatsen, se appendix F i kursboken för det.
+    \end{proof}
+\end{sats}
+
+\subsection{Kedjeregeln (14.5)}
+\subsubsection{En variabel}
+Om \(
+    y = f(x)
+\) och \(
+    x = g(t)
+\) är deriverbara så är \(
+    \dv{t} f(g(t)) = f'(g(t)) \cdot g'(t)
+\). Annorlunda uttryckt \(
+    \dv{y}{t} = \dv{y}{x} \dv{x}{t}
+\).
+
+\subsubsection{Två variabler}
+Låt \(
+    z = f(x,y)
+\), \(
+    x = g(t)
+\) och \(
+    y = h(t)
+\) vara deriverbara. Då är \[
+    \dv{t} f(g(t), h(t)) = f_x(g(t), h(t)) \cdot g'(t) + f_y(g(t), h(t)) \cdot h'(t)
+\] eller kortare 
+\[
+    \dv{z}{t} = \pdv{z}{x}\dv{x}{t} + \pdv{z}{y} \dv{y}{t}.
+\] Beviset involverar definitionen av deriverbarhet i flera variabler.
+
+\dquote{Nu har de flesta svarat, och några har svarat rätt i alla fall.}{Mr.\ Väsentligen}
+\dquote{Då får vi 1+1 vilket är 2.}{Mr.\ Väsentligen}
+
+\subsubsection{Två variabler (variant)}
+Låt \(
+    z = f(x,y)
+\), \(
+    x = g(s, t)
+\) och \(
+    y = h(s,t)
+\) vara deriverbara. Då är kedjeregeln \[
+    \pdv{z}{s} = \pdv{z}{x}\pdv{x}{s} + \pdv{z}{y}\pdv{y}{s}
+\] eller med avseende på \(
+    t
+\): \[
+    \pdv{z}{t} = \pdv{z}{x}\pdv{x}{t} + \pdv{z}{y}\pdv{y}{t}.
+\] 
+Beviset följer av den andra varianten.
+
+\subsection{Riktningsderivator och gradienter (14.6)}
+De partiella derivatorna är derivator längs linjer där \(
+    x
+\) eller \(
+    y
+\) är konstant, d.v.s.\ med riktningsvektor \(
+    \uvec{i} = \lang 1, 0 \rang \text{ eller } \uvec{j} = \lang 0,1 \rang
+\).
+
+\begin{defn}[Riktningsderivata]
+    \emph{Riktningsderivatan (directional derivative)} av \(
+        f(x,y)
+    \) i riktningen \(
+        \vec{u} = \lang a, b \rang
+    \) där \(
+        \ve{u} 
+    \) är en enhetsvektor (längd \(
+        \sqrt{a^2+b^2} = 1
+    \)) ges av \[
+        D_{\ve{u} } f(x,y) = \blim_{h \to 0} \bif{f(x+ah, y+bh)-f(x,y)}{h}.
+    \]
+\end{defn}
+
+\begin{anm}
+    \(
+        f_x = D_{\uvec{i}} f
+    \) och \(
+        f_y = D_{\uvec{j}} f
+    \) 
+\end{anm}
+
+\begin{defn}[Gradient]
+    \emph{Gradienten} av \(
+        f(x,y)
+    \) är \[
+        \nabla f = \lang f_x, f_y\rang
+    \] 
+\end{defn}
+
+\begin{sats}[Deriverbarhet, riktningsvektor och gradient]
+    Om \(
+        f
+    \) är deriverbar är \[
+        D_{\ve{u} } f = \nabla f \cdot \ve{u}.
+    \] 
+
+    \begin{proof}
+        Låt \(
+            g(h) = f(x+ah, y+bh) \text{ och } \ve{u} = \lang a, b \rang
+        \). Enligt kedjeregeln är \(
+            g'(h) = f_x(x+ah, y+bh) \cdot a + f_y(x+ah, y+bh) \cdot b
+        \). \(
+            g'(0) = f_x(x, y) \cdot a + f_y(x, y ) \cdot b \implies 
+            D_{\ve{u} }f(x,y) = \nabla f(x,y) \cdot \ve{u} 
+        \).
+    \end{proof}
+\end{sats}
+
+\end{document} 

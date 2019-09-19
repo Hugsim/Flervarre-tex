@@ -1,0 +1,329 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-09-13}
+
+\subsection{Riktningsderivator och gradienter}
+\begin{påm}
+    Låt \(
+        \ve{u} = \lang u_1, u_2\rang \text{ och } \ve{v} = \lang v_1, v_2\rang
+    \) vara vektorer.
+
+    Skalärprodukten är då \[
+        \ve{u} \cdot \ve{v} = u_1v_1 + u_2v_2.
+    \]
+
+    Längden av \(
+        \ve{u} \text{ är } \)
+        \[\abs{\ve{u} } = \sqrt{\ve{u} \cdot \ve{u} } = \sqrt{u_1^2 + u_2^2}.\]
+    
+
+    Det gäller också att \[
+        \ve{u} \cdot \ve{v} = \abs{\ve{u} } \cdot \abs{\ve{v} } \cdot \cos(\theta)
+    \] där \(
+        \theta
+    \) är vinkeln mellan \(
+        \ve{u} \text{ och } \ve{v} 
+    \).
+
+    Det följer av förra påståeendet att för två vinkelräta vektorer är \(
+        \ve{u} \cdot \ve{v} = 0
+    \).
+\end{påm}
+
+\begin{sats}[Största värde för riktningsderivata]
+    \(
+        D_{\ve{u}} f(x,y)
+    \) är som störst när \(
+        \ve{u} 
+    \) pekar i samma riktning som \(
+        \nabla f(x,y)
+    \) d.v.s.\ när \(
+        \ve{u} = \bif{\nabla f(x,y)}{\abs{\nabla f(x,y)}} 
+    \).
+
+Alltså \(
+    f(x,y)
+\) växer som mest när \(
+    (x,y)
+\) rör sig från \(
+    (x_0, y_0)
+\) i riktningen \(
+    \bif{\nabla f(x_0, y_0)}{\abs{\nabla f(x,y)}}
+\).
+
+\begin{proof}
+    \(
+        D_{\ve{u}} f(x,y) = \ve{u} \cdot \nabla f(x,y) 
+        = \abs{\ve{u}} \cdot \abs{\nabla f(x,y)} \dot \cos(\theta)
+    \) där \(
+        \theta
+    \) är vinkeln mellan \(
+        \ve{u} \text{ och } \nabla f(x,y)
+    \). Eftersom \(
+        \ve{u}
+    \) är en enhetsvektor vet vi att \(
+        \abs{\ve{u}} = 1
+    \). \(
+        \abs{\nabla f(x,y)} \cos(\theta)
+    \) blir som störst när \(
+        \cos(\theta) = 1
+    \), d.v.s. \(
+        \theta = 0
+    \). Det betyder att \(
+        \ve{u}
+    \) och \(
+        \nabla f(x,y)
+    \) pekar i samma riktning.
+\end{proof}
+\end{sats}
+
+\begin{anm}
+    I princip allt från denna veckan generaliserar enkelt från två till 
+    tre eller fler variabler.
+\end{anm}
+
+\subsection{Tangentplan till nivåytor (14.6)}
+En nivåyta bestäms av \(
+    F(x,y,x) = k
+\) för något konstant \(
+    k \in \mathbb{R}
+\).
+
+En graf \(
+    z = f(x,y)
+\) är ett specialfall av en nivåyta, eftersom vi kan ta \(
+    F(x,y,z) = z - f(x,y)
+\) och \(
+    k = 0
+\).
+
+Ska definiera tangentplan till allmän nivåyta. Vill definiera tangentplanet till
+\(
+    F(x,y,z) = k
+\) i \(
+    (x_0, y_0, z_0)
+\) som det plan som genom \(
+    (x_0, y_0, z_0)
+\) s.a.\ det för varje kurva \(
+    \ve{r} (t) = \lang x(t), y(t), z(t)\rang
+\) som uppfyller \(
+    \ve{r}(t_0) = \lang x_0, y_0, z_0\rang
+\) och ligger i nivåytan så innehåller tangentplanet \(
+    \ve{r} ' (t_0)
+\). 
+
+\f
+
+Anta att \(
+    \ve{r} 
+\) är en sådan kurva. Då är \(
+    \forall t : F(x(t), y(t), z(t)) = k
+\). Nu deriverar vi båda sidor med avseende på \(
+    t
+\) m.h.a.\ kedjeregeln så att vi får 
+\begin{align*}
+    F_x\cdot x'(t) + F_y \cdot y'(t) + F_z \cdot z'(t) &= 0 \\
+    \nabla F(\ve{r}(t) ) \cdot \ve{r} '(t) &= 0.
+\end{align*}
+Om vi tar \(
+    t = t_0
+\) får vi att \(
+    \nabla F(\ve{r} (t_0)) = \nabla F(x_0, y_0, z_0) 
+\) är vinkelrät mot \(
+    \ve{r} '(t_0)
+\).
+
+\begin{påm}
+    En normalvektor \(
+        \ve{n} 
+    \) till ett plan är en nollskild vektor som är vinkelrät mot alla vektorer 
+    i planet. Om planet går genom \(
+        (x_0, y_0, z_0)
+    \) ges hela planet av \[
+        \ve{n} \cdot \lang x-x_0, y-y_0, z-z_0\rang = 0.
+    \]
+\end{påm}
+
+\begin{defn}[Tangentplan till nivåyta]
+    \emph{Tangentplanet} till en nivåyta \(
+        F(x,y,z) = k
+    \) genom en punkt \(
+        (x_0, y_0, z_0)
+    \) där \(
+        \nabla F(x_0,y_0,z_0) \neq \ve{0} 
+    \) är \(
+        \nabla F(x_0, y_0, z_0) \cdot \lang x-x_0, y-y_0, z-z_0\rang = 0
+    \).
+\end{defn}
+
+Det är definierat s.a.\ det uppfyller vad vi ville att det skulle uppfylla.
+
+\begin{obs}
+    Om \(
+        F(x,y,z) = z-f(x,y)
+    \) är nivåytan där \(
+        F = 0
+    \) samma som grafen \(
+        z = f(x,y)
+    \). Eftersom \(
+        \nabla F = \lang -f_x, -f_y, 1\rang
+    \) får i en punkt \(
+        (a, b, f(a,b)) 
+    \) samma tangentplan \(
+        \lang -f_x(a,b), -f_y(a,b), 1\rang \cdot \lang x-a, y-b, z-f(a,b)\rang
+    \) oavsett om man ser ytan som en nivåyta eller grafen till en funktion.
+\end{obs}
+
+\begin{ex}
+    Bestäm tangentplanet till ytan \(
+        x^2-y^2+z^2 = 1
+    \) i punkten \(
+        (1, 1, 1)
+    \). 
+
+    Ytan är nivåytan \(
+        F(x,y,z) = 1
+    \) där \(
+        F(x,y,z) = x^2-y^2+z^2
+    \).
+
+    \(
+        \nabla F = \lang 2x, -2y, 2z\rang 
+    \) och \(
+        \nabla F(1,1,1) = \lang 2, -2, 2\rang
+    \). Då är tangentplanet \(
+        \nabla F(1,1,1) \cdot \lang x-1, y-1, z-1 \rang = 0
+    \) vilket ger 
+    \begin{align*}
+        2(x-1)-2(y-1)+2(z-1)&=0\\
+        x-1-y+1+z-1 &= 0 \\
+        x-y+z &= 1.
+    \end{align*}
+\end{ex}
+
+\subsection{Lokala extremvärden}
+\begin{defn}[Lokalt maximum]
+    \(
+        f(x,y) 
+    \) har ett \emph{lokalt maximum} i \(
+        (a,b)
+    \) om \(
+        f(x,y) \leq f(a,b)
+    \) gäller för \(
+        (x,y) \text{ nära } (a,b)
+    \). (D.v.s.\ det gäller för \(
+        (x,y) 
+    \) i någon cirkelskiva kring \(
+        (a,b)
+    \).)
+\end{defn}
+
+\begin{defn}[Absolut/Globalt maximum]
+    \(
+        f(x,y) 
+    \) har ett \emph{absolut/globalt maximum} i \(
+        (a,b)
+    \) om \(
+        f(x,y) \leq f(a,b)
+    \) gäller för alla \(
+        (x,y)
+    \) i definitionsmängden till \(
+        f
+    \). 
+\end{defn}
+
+\begin{defn}[Lokalt minimum]
+    \(
+        f(x,y) 
+    \) har ett \emph{lokalt minimum} i \(
+        (a,b)
+    \) om \(
+        f(x,y) \geq f(a,b)
+    \) gäller för \(
+        (x,y) \text{ nära } (a,b)
+    \). (D.v.s.\ det gäller för \(
+        (x,y) 
+    \) i någon cirkelskiva kring \(
+        (a,b)
+    \).)
+\end{defn}
+
+\begin{defn}[Absolut/Globalt minimum]
+    \(
+        f(x,y) 
+    \) har ett \emph{absolut/globalt minimum} i \(
+        (a,b)
+    \) om \(
+        f(x,y) \geq f(a,b)
+    \) gäller för alla \(
+        (x,y)
+    \) i definitionsmängden till \(
+        f
+    \). 
+\end{defn}
+
+\begin{defn}[Extremvärde]
+    Ett \emph{extremvärde} är ett minimum eller maximum.
+\end{defn}
+
+\begin{ex}
+    \(
+        f(x,y) = 3x^2+y^2
+    \) har ett lokalt och globalt minimum, var?
+
+    Inses lätt att det sker i \(
+        (0,0)
+    \) då den annars är strikt positiv för \(
+        x, y, \in \mathbb{R}
+    \).
+\end{ex}
+
+\begin{påm}
+    I en variabel, om \(
+        f
+    \) är deriverbar och har ett (lokalt) extremvärde i \(
+        a
+    \) är \(
+        f'(a) = 0
+    \).
+\end{påm}
+
+\begin{sats}[Extremvärde i en punkt]
+    Om \(
+        f(x,y)
+    \) har ett (lokalt) extremvärde i punkten \(
+        (a,b)
+    \) och \(
+        f_x(a,b)
+    \) och \(
+        f_y(a,b)
+    \) existerar är \(
+        f_x(a,b) = 0
+    \) och \(
+        f_y(a,b) = 0
+    \).
+
+    \begin{proof}
+        Om vi låter \(
+            h(x) = f(x,b)
+        \) ha ett extremvärde i \(
+            x=a
+        \) gäller \(
+            h'(a) = 0
+        \) och \(
+            h'(a) = f_x(a,b) 
+        \), vilket ger att \(
+            f_x(a,b) = 0
+        \).
+
+        \(
+            f_y(a,b) = 0
+        \) visas analogt.
+    \end{proof}
+\end{sats}
+
+\end{document} 

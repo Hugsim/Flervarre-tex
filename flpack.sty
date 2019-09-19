@@ -1,0 +1,218 @@
+\ProvidesPackage{flpack}[TeX för fl]
+
+
+\PassOptionsToPackage{export}{adjustbox}
+
+\RequirePackage{standalone}
+
+\RequirePackage[swedish]{babel}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{mathtools}
+\RequirePackage{amsmath}[sumlimits, intlimits]
+\RequirePackage{bm}
+\RequirePackage{amsfonts}
+\RequirePackage{physics}
+\RequirePackage{titlesec}
+\RequirePackage{mathtools}
+\RequirePackage{amssymb}
+\RequirePackage{titling}
+\RequirePackage{esdiff}
+\RequirePackage{bytefield}
+\RequirePackage[binary-units=true, per-mode=symbol]{siunitx}
+\RequirePackage{accents}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\RequirePackage[parfill]{parskip}
+\RequirePackage{changepage}
+\RequirePackage{csquotes}
+\RequirePackage{icomma}
+\RequirePackage[export]{adjustbox}
+\RequirePackage{booktabs}
+\RequirePackage{enumerate}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{amsthm}
+\RequirePackage[framemethod=tikz]{mdframed}
+\RequirePackage{thmtools}
+
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{ex}{Exempel}
+\newtheorem{sats}{Sats}
+\newtheorem{anm}{Anmärkning}
+\newtheorem{påm}{Påminnelse}
+\newtheorem{obs}{Obs.}
+\newtheorem{påst}{Påstående}
+
+\mdfsetup{skipabove=\topskip,skipbelow=\topskip}
+
+\surroundwithmdframed[%
+    backgroundcolor=gray!10,%
+    innertopmargin=\topskip,%
+]
+{defn}
+
+\surroundwithmdframed[%
+    backgroundcolor=gray!10,%
+    innertopmargin=\topskip,%
+]{ex}
+\surroundwithmdframed[%
+    backgroundcolor=gray!10,%
+    innertopmargin=\topskip,%
+]{sats}
+\surroundwithmdframed[%
+    backgroundcolor=gray!10,%
+    innertopmargin=\topskip,%
+]{anm}
+\surroundwithmdframed[%
+    backgroundcolor=gray!10,%
+    innertopmargin=\topskip,%
+]{påm}
+\surroundwithmdframed[%
+    backgroundcolor=gray!10,%
+    innertopmargin=\topskip,%
+]{obs}
+\surroundwithmdframed[%
+    backgroundcolor=gray!10,%
+    innertopmargin=\topskip,%
+]{påst}
+
+\newcommand{\realn}{\mathbb{R}}
+\newcommand{\intn}{\mathbb{Z}}
+\newcommand{\compn}{\mathbb{C}}
+
+\newcommand{\ve}[1]{\accentset{\rightharpoonup}{#1}}
+
+\newcommand{\fig}[1]{(Figur #1)}
+
+\newcommand{\bs}{\displaystyle\sum}
+\newcommand{\bi}{\displaystyle\int\limits}
+
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\inv}[1]{\frac{1}{#1}}
+
+\newcommand{\inputfl}[1]{
+    \section{Föreläsning #1}
+    \setcounter{FigInsertC}{0}
+    \input{fl/#1}
+}
+
+\newcounter{FigInsertC}
+
+\newcommand{\niceIncludeGraphics}[1]{
+    \includegraphics[max width=\textwidth]{#1}
+}
+
+\NewDocumentCommand{\f}{o}{
+   
+    \IfNoValueTF{#1}{
+        \stepcounter{FigInsertC}
+        \IfFileExists{fig/\fname-\theFigInsertC.png}{
+        \niceIncludeGraphics{fig/\fname-\theFigInsertC}
+    }{
+        \IfFileExists{../fig/\fname-\theFigInsertC.png}{
+            \niceIncludeGraphics{../fig/\fname-\theFigInsertC}
+        }{
+            Figur \theFigInsertC
+        }
+    }
+    }{
+        \IfFileExists{fig/\fname-#1.png}{
+        \niceIncludeGraphics{fig/\fname-#1}
+    }{
+        \IfFileExists{../fig/\fname-#1.png}{
+            \niceIncludeGraphics{../fig/\fname-#1}
+        }{
+            Figur \theFigInsertC
+        }
+    }
+    }
+}
+
+\NewDocumentCommand \dquote {mm} {
+    \pagebreak[2]
+    \begin{center}
+        \vspace{\baselineskip}
+        
+        \begin{adjustwidth}{0pt}{0pt}
+            \textit{\enquote{#1}}\nopagebreak\par%
+            \nopagebreak\flushright{-- #2}%
+        \end{adjustwidth}
+        
+        \vspace{0.75\baselineskip}
+    \end{center}
+    \pagebreak[2]
+}
+
+
+% Ett litet makro för att typsätta schyssta citat.
+\NewDocumentCommand\dquoteconv{mmmm}{
+    \vspace{\baselineskip}
+    
+    \begin{center}
+        \begin{tabular}{l p{5mm} r}
+        \parbox[c]{0.3\textwidth}{
+            \textit{\enquote{#1}}\\*
+            \begin{flushright}-- #2\end{flushright}
+        }
+        &&
+        \parbox[c]{0.3\textwidth}{
+            \textit{\enquote{#3}}\\*
+            \begin{flushright}-- #4\end{flushright}
+        }
+        \end{tabular}
+    \end{center}
+    
+    \vspace{0.75\baselineskip}
+}
+
+\newcommand{\fquote}[1]{
+    \dquote{#1}{Åke Fäldt}
+}
+
+\newcommand{\unitvector}[1]{
+    \uvec{#1}
+}
+
+\newcommand{\bif}{
+    \displaystyle\frac
+}
+
+\newcommand{\blim}{
+    \displaystyle\lim
+}
+
+\newcommand{\lang}{
+    \left\langle
+}
+
+\newcommand{\rang}{
+    \right\rangle
+}
+
+\newcommand{\RR}{\mathbb{R}}
+
+% \newcommand{\uveci}{
+%     {\bm{\hat{\textnormal{\bfseries\i}}}}
+% }
+
+\newcommand{\uvec}[1]{
+    \hat{#1}
+}
+
+% \newcommand{\uvecj}{{\bm{\hat{\textnormal{\bfseries\j}}}}}
+% \DeclareRobustCommand{\uvec}[1]{{%
+%   \ifcat\relax\noexpand#1%
+%     % it should be a Greek letter
+%     \bm{\hat{#1}}%
+%   \else
+%     \ifcsname uvec#1\endcsname
+%       \csname uvec#1\endcsname
+%     \else
+%       \bm{\hat{\mathbf{#1}}}%
+%      \fi
+%    \fi
+% }}
+
+\endinput

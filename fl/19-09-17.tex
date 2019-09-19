@@ -1,0 +1,311 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-09-17}
+
+\subsection{Lokala extremvärden forts.}
+\begin{defn}[Kritiska/stationära punkter]
+    Om \(
+        f_x(a,b) = f_y(a,b) = 0
+    \) säger man att \(
+        f
+    \) har en \emph{kritisk/stationär punkt} i \(
+        (a,b)
+    \). 
+\end{defn}
+
+Alla lokala extremvärden är kritiska punkter (om de partiella derivatorna 
+existerar) men det kan finns kritiska punkter som inte är lokala extremvärden.
+Sådana punkter kallas \emph{sadelpunkter}.
+
+\begin{ex}
+    Låt \(
+        f(x,y) = x^2-y^2
+    \), bestäm dess kritiska punkter.
+
+    Den har en sadelpunkt i \(
+        (0,0)
+    \) eftersom \(
+        \nabla f = \lang 2x, -2y\rang \implies \nabla f(0,0) = (0,0)
+    \), d.v.s.\ \(
+        (0,0)
+    \) är en kritisk punkt, men den är varken ett lokalt maximum eller minimum.
+
+    Grafen har formen av en \enquote{sadel}.
+
+    \f
+\end{ex}
+
+Hur avgör man då om en kritisk punkt är ett extremvärde? I en variabel 
+gäller, för funktioner där \(
+    f'(a) = 0
+\), att om \(
+    f''(a) > 0
+\) så har \(
+    f(x)
+\) ett lokalt minimum i \(
+    x=a
+\) och om \(
+    f''(a) < 0
+\) så har \(
+    f(x)
+\) ett lokalt minimum i \(
+    x=a
+\). Om \(
+    f''(a) = 0
+\) kan vi inte säga något om punkten.
+
+\begin{sats}[Test för lokala extrempunkter i två variabler]
+    Anta att de partiella derivatorna av ordning \(
+        2
+    \) till \(
+        f(x,y)
+    \) är kontinuerliga nära \(
+        (a,b)
+    \) och att \(
+        f_x(a,b) = f_y(a,b) = 0
+    \).
+
+    Låt \(
+        D = f_{xx}(ab)f_{yy}(a,b)-{f_{xy}(a,b)}^2
+    \). Då har vi fyra fall:
+
+    \begin{enumerate}
+        \item Om \(
+            D > 0 \text{ och } f_{xx}(a,b) > 0\text{ (eller } f_{yy}(a,b) > 0\text{)}  
+        \) är \(
+            (a,b)
+        \) ett lokalt minimum.
+
+        \item Om \(
+            D > 0 \text{ och } f_{xx}(a,b) < 0\text{ (eller } f_{yy}(a,b) < 0\text{)}  
+        \) är \(
+            (a,b)
+        \) ett lokalt maximum.
+    
+        \item Om \(
+            D < 0
+        \) är \(
+            (a,b)
+        \) en sadelpunkt.
+
+        \item Om \(
+            D = 0
+        \) vet vi inget om punkten.
+    \end{enumerate}
+
+    \begin{proof}
+        Går ut på att reducera till motsvarande test i en variabel, se slutet 
+        av 14.7 i boken.
+    \end{proof}
+\end{sats}
+
+Eftersom \(
+    f_{xy}(a,b) = f_{yx}(a,b)
+\) (Clairaut's sats) är \(
+    D = \det{H}
+\) där \(
+    H 
+\) är \enquote{Hessianmatrisen} \(
+    H = 
+    \begin{bmatrix}
+        f_{xx} & f_{xy}\\ 
+        f_{yx} &f_{yy} 
+    \end{bmatrix}
+\).
+
+För att komma ihåg vilket villkor som ger vilken slutsats kan man jämföra med
+följande modellfall:
+\begin{enumerate}
+    \item \(
+        f(x,y) = x^2+y^2
+    \) som har ett lokalt minimum i origo. \(
+        D = 2\cdot 2 - 0 \cdot 0 = 4 > 0
+    \), \(
+        f_{xx} = 2 > 0
+    \).
+
+    \item \(
+        f(x,y) = -x^2-y^2
+    \) som har ett lokalt maximum i origo. \(
+        D = (-2)\cdot(-2) - 0 \cdot 0 = 4 > 0
+    \), \(
+        f_{xx} = -2 < 0
+    \).
+
+    \item \(
+        f(x,y) = x^2-y^2
+    \) som har en sadelpunkt i origo. \(
+        D = 2\cdot (-2) - 0 \cdot 0 = -4 < 0
+    \).
+\end{enumerate}
+
+\begin{ex}
+    Bestäm de kritiska punkterna till \(
+        f(x,y) = 3x^2+6xy-y^3
+    \) och avgör om de är sadelpunkter, lokala minimum eller lokala maximum.
+
+    Vi börjar med att avgöra kritiska punkter, d.v.s.\ punkter där de partiella 
+    derivatorna är \(
+        0
+    \).
+
+    \(\left\{\begin{matrix}
+        f_x = 6x + 6y = 0 \iff x = -y \\
+        f_y = 6x - 3y^2 = 0 \iff 2x-y^2 = 0 
+    \end{matrix}\right.\) 
+    
+    Detta ger, om man sätter in uttrycken i varandra, \(
+        2(-y)-y^2 = 0 \iff y(-2-y) = 0 \iff y=0 \text{ el. } y = -2
+    \). Om vi sätter in detta i uttrycket för \(
+        x
+    \) får vi \(
+        x = -y = -0 = 0
+    \) och \(
+        x = -(-2) = 2
+    \) vilket ger de kritiska punkterna \(
+        (0,0)
+    \) och \(
+        (2,-2)
+    \).
+
+    Vi undersöker nu dessa kritiska punkter.
+
+    \(
+        f_{xx} = 6
+    \), \(
+        f_{yy} = -6y
+    \) och \(
+        f_{xy} = 6
+    \). 
+    
+    I \(
+        (0,0) 
+    \) gäller \(
+        D(0,0) = f_{xx}(0,0) \cdot f_{yy}(0,0) - {f_{xy}(0,0)}^2 = 6 \cdot 0 - 6^2 = -36 \implies (0,0)
+    \) är en sadelpunkt.
+
+    I \(
+        (2,-2) 
+    \) gäller \(
+        D(2,-2) = f_{xx}(2,-2) \cdot f_{yy}(2,-2) - {f_{xy}(2,-2)}^2 = 6 \cdot (-6)\cdot (-2) - 6^2 = 72 - 36 = 36 \implies (2,-2)
+    \) är en lokal extrempunkt. Eftersom \(
+        f_{xx}(2,-2) = 6 > 0
+    \) är \(
+        (2,-2)
+    \) ett lokalt minimum.
+\end{ex}
+
+För att generalisera det här till tre eller fler variabler måste man bygga på 
+egenvärden till Hessianmatrisen. 
+
+\subsection{Globala extremvärden (14.7)}
+I en variabel, om \(
+    f(x)
+\) är kontinuerlig på ett slutet och begränsat intervall \(
+    [a,b]
+\) så har \(
+    f
+\) ett globalt max- och min-värde någonstans i \(
+    [a,b]
+\). Ej sant för t.ex.\ öppna intervall eller obegränsade intervall. Se 
+exempelvis \(
+    f(x) = x
+\) på intervallet \(
+    x \in (0,\infty)
+\), då finns inget specifikt max-värde eftersom vi alltid kan gå närmare
+\(
+    \infty
+\) och det finns inget min-värde eftersom vi alltid kan gå lite närmare \(
+    0
+\).
+
+Vi ska definiera motsvarigheten till \enquote{sluten och begränsad} i 
+två variabler.
+
+\begin{defn}[Randpunkter]
+    \(
+        (a,b)
+    \) är en \emph{randpunkt (boundary point)} till \(
+        D \subseteq \realn^2
+    \) om varje cirkelskiva kring \(
+        (a,b)
+    \) innehåller både punkter i \(
+        D
+    \) och punkter som inte är i \(
+        D
+    \).
+\end{defn}
+
+\begin{ex}
+    Randpunkter till \(
+        D_1 = \{ (x,y) | x^2+y^2 \leq 1 \}
+    \) är \(
+        \{(x,y) | x^2+y^2 = 1\}
+    \).
+
+    Till \(
+        D_2 = \{ (x,y) | x^2+y^2 < 1 \}
+    \) är randpunkterna precis som ovan \(
+        \{(x,y) | x^2+y^2 = 1\}
+    \), trots att de inte är i \(
+        D
+    \).
+\end{ex}
+
+\dquote{Här går kanske inte intuitionen jättebra.}{Mr.\ Väsentligen om sin publik}
+
+\begin{defn}[Slutna mängder]
+    En mängd \(
+        D \subseteq \realn^2
+    \) är \emph{sluten} om den innehåller alla sina randpunkter.
+\end{defn}
+
+I exemplet ovan är \(
+    D_1
+\) sluten och \(
+    D_2
+\) inte sluten.
+
+\begin{defn}
+    En mängd \(
+        D \subseteq \realn^2
+    \) är \emph{begränsad} om den är innehållen i någon cirkelskiva.
+\end{defn}
+
+\begin{ex}
+    \(
+        \{(x,y) | 0 \leq x \leq 1, 0 \leq y \leq 1\}
+    \) är begränsad eftersom vi kan innesluta kvadraten i en stor cirkel,
+    exempelvis en cirkel med centrum i origo och radie \(
+        31415
+    \).
+
+    \(
+        \{(x,y) | 0 \leq x \leq 1\}
+    \) är inte begränsad eftersom den inte går att innesluta i en cirkel.
+\end{ex}
+
+\begin{sats}
+    Om \(
+        f(x,y)
+    \) är kontinuerlig på \(
+        D \subseteq \realn^2
+    \) och \(
+        D
+    \) är både sluten och begränsad då har \(
+        f
+    \) globala max- och min-punkter någonstans i \(
+        D
+    \).
+
+    \begin{proof}
+        Beviset involverar definitionen av reella tal vilket är lite lagom 
+        överkurs för den här kursen. Finns säkert på nätet eller något.
+    \end{proof}
+\end{sats}
+
+\end{document} 

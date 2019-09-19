@@ -1,0 +1,162 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-09-03}
+
+\subsection{Inledning}
+Punkter i planet \(
+    \mathbb{R}^2
+\) beskrivs med två koordinater, oftast \(
+    (x,y)
+\). Punkter i rummet \(
+    \mathbb{R}^2
+\) beskrivs med tre koordinater, oftast \(
+    (x,y,z)
+\). 
+
+I envariabelanalys studerar man funktioner \(
+    f: \mathbb{R} \to  \mathbb{R}
+\), då är det naturligt att också studera vektorvärda funktioner \(
+    f: \mathbb{R}^m \to  \mathbb{R}^n
+\). \(
+    f = \lang f_1(x_1, \dots, x_m), \dots, f_n(x_1, \dots, x_m)\rang 
+\) har \(
+    n
+\) komponenter och \(
+    m
+\) variabler. Detta är dock för allmänt, 
+i kursen ska vi studera viktiga specialfall: 
+
+\(
+    n = 2,3, m = 1: f:\mathbb{R} \to  \mathbb{R}^2 
+\) så att \(
+    f(t)=\lang f_1(t), f_2(t)\rang 
+\). En variabel \(
+    t
+\) bestämmer två komponenter \(
+    f_1(t)
+\) och \(
+    f_2(t)
+\).
+
+\(
+    n = 1, n = 2,3: f: \mathbb{R}^2 \to  \mathbb{R}, f(x,y) \in \mathbb{R}
+\) så att två variabler \(
+    x,y
+\) bestämmer en komponent/tal \(
+    f(x,y)
+\). 
+
+\(
+    n = m = 2,3: f:\mathbb{R}^2 \to  \mathbb{R}^2
+\). Dessa kallas vektorfält.
+
+\subsection{Kurvor i rummet eller planet (13.1)}
+\begin{defn}[Kurvor i rummet och deras parametrisering]
+En \emph{kurva} \(
+    C
+\) i planet är alla punkter vars position ges av \(
+    \ve{r}(t) = \lang x(t),y(t)\rang 
+\) där \(
+    x(t), y(t)
+\) är kontinuerliga funktioner på något intervall.
+\(
+    \ve{r}(t) 
+\) kallas en \emph{parametrisering} av \(
+    C
+\). 
+\end{defn}
+
+Motsvarande definition av kurvor i rummet.
+
+\begin{ex}
+En rät linje genom en punkt \(
+    (x_0,y_0)
+\) med riktningsvektor \(
+    \ve{v} = \lang v_1,v_2\rang  
+\) är en kurva som kan parametriseras av \(
+    \ve{r}(t) = \lang x_0+tv_1, y_0+tv_2\rang
+\).
+\end{ex}
+
+Om \(
+    \ve{r}(t) = \lang x(t), y(t)\rang 
+\) är definierad för \(
+    t \text{ nära } t_0
+\) ges \emph{gränsvärdet} av \(
+    \ve{r}(t) 
+\) när \(
+    t
+\) går mot \(
+    t_0
+\) av \(
+    \blim_{t \to  t_0} \ve{r} (t) = \lang \blim_{t \to  t_0} x(t), \blim_{t \to  t_0} y(t)\rang
+\) om gränsvärdena i högerledet existerar.
+
+\subsection{Derivator av vektorvärda funktioner och tangentlinjer (13.2)}
+\begin{defn}[Derivatan av vektorvärda funktioner]
+    \emph{Derivatan} av \(
+        \ve{r} (t) = \ve{r}'(t) = \blim_{h\to  0} \bif{\ve{r} (t+h) - \ve{r}(t) }{h}   
+    \) om gränsvärdet existerar.
+\end{defn}
+
+Om \(
+    \ve{r} (t) = \lang x(t), y(t)\rang
+\) gäller att om \(
+    x(t) \text{ och } y(t)
+\) är deriverbara så är \(
+    \ve{r}' (t) = \lang \blim_{h\to  0} \bif{x(t+h) - x(t) }{h}, \blim_{h\to  0} \bif{y(t+h) - y(t) }{h}\rang
+    = \lang x'(t), y'(t)\rang
+\) 
+
+\begin{ex}
+    Låt \(
+        \ve{r} (t) = \lang 2t, \sqrt{t}\rang
+    \). Beräkna \(
+        \ve{r} '(t)
+    \).
+\end{ex}
+\(
+    \ve{r} (t) = \lang \dv{t} (2t), \dv{t} (\sqrt{t}) \rang 
+    = \lang 2, \half t^{\half-1} \rang 
+    = \lang 2, \bif{1}{2 \sqrt{t}} \rang
+\) 
+
+\begin{defn}[Tangentvektor och tangentlinje till linjer]
+    \(
+        \ve{r}'(t)
+    \) kallas för \emph{tangentvektor} till \(
+        \ve{r}(t)
+    \) och linjen genom \(
+        P = \ve{r} (t_0)
+    \) med riktningsvektor \(
+        \ve{r} '(t) 
+    \) kallas för \emph{tangentlinjen} till \(
+        \ve{r} 
+    \) i \(
+        P
+    \).
+    Tangentlinjen ges av \(
+    L(t) = \ve{r} (t_0) + t \ve{r} '(t_0)
+\).
+\end{defn}
+
+\begin{ex}
+    Bestäm tangentlinjen till \(
+        \ve{r} (t) = \lang 2t, \sqrt{t} \rang
+    \) i punkten \(
+        P = \ve{r} (4) = \lang 2 \cdot 4, \sqrt{4} \rang
+        = \lang 8, 2 \rang
+    \). Tangentvektor \(
+        \ve{r} '(t) = \lang 2, \inv{2 \sqrt t} \rang
+        \implies \ve{r} '(4) = \lang 2, \inv{4} \rang
+    \). Tangentlinjen \(
+        L(t) = \lang 8, 2 \rang + t \cdot \lang 2, \inv{4} \rang 
+        = \lang 8 + 2t, 2 + \bif{t}{4} \rang
+    \) 
+\end{ex}
+
+\end{document}
