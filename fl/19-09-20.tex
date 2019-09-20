@@ -1,0 +1,155 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-09-20}
+
+\subsection{Längd av kurvor (10.2, 13.3)}
+\begin{sats}[Längd av en kurva]
+    Låt \(
+        \ve{r} (t), a \leq t \leq b
+    \) vara en kurva. Då är dess längd \(
+        l = \int_a^b \abs{\ve{r}'(t)}\dd t
+    \).
+
+    \begin{proof}
+        Finns en skiss till ett argument i 10.2 i boken.
+    \end{proof}
+\end{sats}
+
+\begin{ex}
+    Beräkna längden av kurvan med parametrisering \(
+        \ve{r} (t) = \lang x(t), y(t) \rang = \lang t^2, t^3\rang
+    \) för \(
+        0 \leq t \leq 1
+    \).
+
+    Då är \(
+        \abs{\ve{r}' (t)} 
+        = \sqrt{{x'(t)}^2+{y'(t)}^2} 
+        = \sqrt{ {(2t)}^2 + {(3t^2)}^2 }
+        = \sqrt{ 4t^2+9t^4 }
+        = \sqrt{ t^2(4+9t^2) }
+        = \sqrt{t^2} \sqrt{4+9t^2}
+        = t \sqrt{4+9t^2}
+    \).
+
+    Från formeln ovan är \(
+        l = \int_0^1 t \sqrt{4+9t^2} \dd t 
+        = \left\{\begin{matrix}
+            s = 4+9t^2\\ 
+            \dd s = 18t \dd t \implies t \dd t = \frac{\dd s}{18} \\ 
+            t = 0 \implies s = 4\\ 
+            t = 1 \implies s = 13
+            \end{matrix}\right.
+        = \inv{18} \int_4^{13} \sqrt{s} \dd s
+        = \inv{18} \left[ \frac{s^{\frac{3}{2}}}{\frac{3}{2}} \right]_4^{13} 
+        = \inv{18} \left( \frac{{13}^{\frac{3}{2}}}{\frac{3}{2}} - \frac{4^{\frac{3}{2}}}{\frac{3}{2}}\right)
+        = \inv{27} \left( {13}^{\frac{3}{2}} - 4^{\frac{3}{2}}\right)
+    \) 
+\end{ex}
+
+\begin{sats}[Längden av en graf]
+    Längden av en graf \(
+        y = f(x)
+    \) är \(
+        l = \int_a^b \sqrt{1 + {f'(x)}^2} \dd x
+    \). 
+    \begin{proof}
+        \(
+            f(x)
+        \)  kan parametriseras med ekvationen \(
+            \ve{r} (t) = \lang t, f(t) \rang 
+        \). Då blir \(
+            \abs{\ve{r} '(t)} = \sqrt{1 + {f'(x)}^2}
+        \) och längden därmed \(
+            l = \int_a^b \sqrt{1 + {f'(x)}^2} \dd x
+        \).
+
+        Alternativ härledning finns i föreläsningsslides.
+    \end{proof}
+\end{sats}
+
+\subsection{Rörelse av partiklar i rummet (13.4)}
+Man kan använda en vektorvärd funktion \(
+    \ve{r} (t)
+\) för att beskriva hur en partikel rör sig genom rummet. Vid tiden \(
+    t
+\) befinner sig partikeln i \(
+    \ve{r} (t)
+\). 
+
+\begin{defn}[Hastighetsvektor och fart]
+    \emph{Hastighetsvektorn} \(
+        \ve{v} (t)
+    \) för en sådan partikel ovan är \(
+        \ve{r} '(t)
+    \) och farten är \(
+        \abs{\ve{v} (t)}
+    \). 
+\end{defn}
+
+\begin{defn}[Accelerationsvektor]
+    \emph{Accelerationsvektorn} för en partikel som ovan är \(
+        \ve{a} (t) = \ve{r} ''(t)
+    \).
+\end{defn}
+
+Dessa definitioner används för att beskriva olika fysiska fenomen. Ett exempel
+på en sådan är Newtons andra lag:
+
+\begin{sats}[Newtons andra lag]
+    Om kraften \(
+        \ve{F} (t) 
+    \) verkar på en partikel med massa \(
+        m
+    \) så är \(
+        \ve{F} (t) = m \cdot \ve{a} (t)
+    \).
+\end{sats}
+
+\begin{ex}
+    Anta att bara tyngdkraften verkar på en partikel med massa \(
+        m
+    \), d.v.s.\ \(
+        \ve{F} = \lang 0, 0, -mg\rang  
+    \). Anta också att partikeln vid \(
+        t = 0
+    \) har position \(
+        \ve{r} (0) = \lang a,b,c\rang
+    \) och hastighet \(
+        \ve{v} (0) = \lang d, e, f\rang
+    \). Verifiera att partikeln med position \(
+        \ve{r}(t)  = \lang a+dt, b+et, c+ft-\frac{gt^2}{2}\rang
+    \) uppfyller dessa villkor och rör sig enligt Newtons andra lag.
+
+    Vi kontrollerar detta: Vi stoppar in \(
+        t = 0
+    \) i \(
+        \ve{r} 
+    \) och får \(
+        \ve{r} (0) = \lang a, b, c\rang
+    \) vilket stämmer. Vi deriverar nu för att få \(
+        \ve{v} 
+    \) och får \(
+        \ve{v} (t) = \ve{r} '(t) = \lang d, e, f-gt\rang
+    \). Kontrollerar genom att stoppa in \(
+        t = 0
+    \): \(
+        \ve{v} (0) = \lang d, e, f \rang
+    \). Kontrollerar nu med ytterligare en derivata \(
+        \ve{a} (t) = \ve{v} '(t) = \lang 0, 0, -g\rang
+    \). Använder Newtons andra lag för att kontrollera \(
+        m \cdot \ve{a} (t) = \lang 0, 0, -mg\rang = \ve{F} 
+    \).
+\end{ex}
+
+\dquote{ \(0\) är ju en typisk konstant.}{Mr.\ Väsentligen}
+
+\dquote{Du har ju nog rätt idé, men vad menar du?}{Mr.\ Väsentligen}
+
+\dquote{Ja, det hade man kunnat tänka sig, men så är det inte.}{Mr.\ Väsentligen}
+
+\end{document} 
