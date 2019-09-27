@@ -1,0 +1,202 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-09-27}
+
+\subsection{Integraler över allmänna områden (forts.)}
+\begin{sats}[Volym mellan grafer]
+    Om \(
+        f(x,y) \geq g(x,y) 
+    \) ges volymen av området mellan \(
+        z = g(x,y)
+    \) och \(
+        z = f(x,y)
+    \) där \(
+        (x,y) \in D
+    \) ges av \(
+        \iint_D f(x,y) - g(x,y) \dd A 
+    \).
+\end{sats}
+
+\subsection{Dubbelintegraler och polära koordinater (15.3)}
+\begin{ex}
+    Beräkna volymen av området mellan konen \(
+        x^2+y^2 = z^2, z \geq 0
+    \) och planet \(
+        z = 1
+    \).
+
+    Den första ekvationen ger en kon eftersom \(
+        z = \sqrt{x^2+y^2}
+    \) där \(
+        z
+    \) är avståndet från \(
+        (x,y)
+    \) till origo. 
+
+    Det beror inte på vinkeln \(
+        \theta
+    \) i \(
+        xy
+    \)-planet, så vi kan rita \(
+        z = r
+    \) för ex.\ \(
+        \theta = 0
+    \), där är \(
+        r = x
+    \), och sedan roterar vi kring \(
+        z
+    \)-axeln.
+
+    Ytorna \(
+        z = \sqrt{x^2+y^2}
+    \) och \(
+        z = 1
+    \) skär varandra i \(
+        \sqrt{x^2+y^2} = 1
+    \), d.v.s.\ \(
+        x^2+y^2 = 1
+    \) och \(
+        z = 1
+    \). Området mellan de här ytorna ges då av \(
+        \sqrt{x^2+y^2} \leq z \leq 1
+    \), \(
+        (x,y) \in D = \{(x,y)\; |\; x^2+y^2 \leq 1\}
+    \). \(
+        D
+    \) sett som ett typ I-område begränsas av \(
+        y = \sqrt{1-x^2}
+    \) och \(
+        y = -\sqrt{1-x^2}
+    \). Alltså är \(
+        D = \{(x,y)\; |\; -1 \leq x \leq 1,\; -\sqrt{1-x^2} \leq y \leq \sqrt{1-x^2}\}
+    \). 
+
+    Områdets volym blir då \(
+        \iint_D 1-\sqrt{1-x^2} \dd A 
+        = \int_{-1}^1 \int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}} 1-\sqrt{x^2+y^2} \dd y \dd x
+    \). Detta går att beräkna, men blir krångligt.
+\end{ex}
+
+Idag ska vi snacka om ett betydligt enklare sätt att räkna ut detta.
+
+\subsubsection{Polära koordinater}
+En punkt \(
+    (x,y) \in \realn^2
+\) kan beskrivas med \emph{polära koordinater} \(
+    (r, \theta)
+\) genom \(
+    \left\{\begin{matrix}
+        x = r \cos(\theta) \\ 
+        y = r \sin(\theta)
+    \end{matrix}\right.
+\) där \(
+    \theta
+\) är vinkeln mot \(
+    x
+\)-axeln och \(
+    r
+\) är avståndet från origo.
+
+\begin{ex}
+    Området \(
+        D  =\{(x,y) \; | \; x^2+y^2 \leq 4,\; y \leq x\}
+    \) ser ut som följande:
+    \f
+
+    I polära koordinater är \(
+        D = \{ (r, \theta) \; | \; 0 \leq r \leq 2, \; -\frac{3\pi}{4}  \leq \theta \leq \frac{\pi}{4}  \}
+    \).
+\end{ex}
+
+\begin{defn}[Polära rektanglar och deras area]
+    Ett område är en \emph{polär rektangel} om det i polära koordinater ges av 
+    \(
+        a \leq r \leq b
+    \) och \(
+        \alpha \leq \theta \leq \beta
+    \). 
+
+    \f
+
+    Arean för den rektangeln är \(
+        \frac{(b^2-a^2)(\beta - \alpha)}{2} 
+    \).
+\end{defn}
+
+\subsubsection{Integration i polära koordinater}
+\begin{sats}[Integration av polära rektanglar]
+    Låt \(
+        D 
+    \) vara en polär rektangel som ges av \(
+        a \leq r \leq b, 
+        \alpha \leq \theta \leq \beta
+    \), och anta att \(
+        f 
+    \) är kontinuerlig på \(
+        D
+    \).
+
+    Då är \(
+        \iint_D f \dd A = \int_\alpha^\beta \int_a^b f(r\cos(\theta), r\sin(\theta)) \cdot r \; \dd r \dd \theta
+        = \int_a^b \int_\alpha^\beta f(r\cos(\theta), r\sin(\theta)) \cdot r \; \dd \theta \dd r
+    \).
+
+    \begin{obs}
+        Vänsterledet är en integral över ett allmänt område. 
+        Högerledet är upprepade integraler.
+    \end{obs}
+
+    Man brukar ofta sammanfatta formlerna som \(
+        \dd A = r \dd r \dd \theta = r \dd \theta \dd r
+    \) eller \(
+        \dd x \dd y = r \dd r \dd \theta = r \dd \theta \dd r
+    \). Den första sammanfattningen används i formelbladet.
+
+    \begin{proof}
+        Idén bakom beviset är samma som för ett \enquote{vanligt} 
+        koordinatsystem, men istället för att dela in i rektanglar delar vi 
+        in i polära rektanglar istället. Finns ganska komplett i 
+        föreläsningsslidesen.
+    \end{proof}
+\end{sats}
+
+\begin{ex}
+    Vi går tillbaka till exemplet i början av föreläsningen för att se 
+    om det blir enklare med polära koordinater.
+
+    Beräkna \(
+        \iint_D 1-\sqrt{x^2+y^2} \dd A
+    \) där \(
+        D = \{ (x,y)\;|\; x^2+y^2\leq 1 \}
+    \).
+
+    I polära koordinater ges \(
+        D
+    \) av \(
+        0 \leq r \leq 1, 0 \leq \theta \leq 2 \pi
+    \). Vår funktion är då
+    \begin{align*}
+        f(x,y) &= 1 - \sqrt{x^2+y^2} = \sqrt{(r \cos(\theta))^2 + (r \sin(\theta))^2}\\
+            &= \sqrt{r^2 (\cos^2(\theta) + \sin^2(\theta))} \\
+            &= \sqrt{r^2}\\
+            &= r\\
+            &= f(r, \theta).
+    \end{align*} 
+    
+    Då blir 
+    \begin{align*}
+        \iint_D 1-\sqrt{x^2+y^2} \dd A &= \iint_D 1-r \dd A \\
+            &= \int_0^1 \int_0^{2\pi} (1-r)r\; \dd \theta \dd r\\
+            &= \int_0^1 \left[ (r-r^2) \theta \right]_{\theta=0}^{2\pi} \dd r\\
+            &= 2 \pi \int_0^1 r-r^2 \dd r\\
+            &= 2 \pi \left[ \frac{r^2}{2} - \frac{r^3}{3} \right]_0^1 \\
+            &= 2\pi(\half - \inv{3}) \\
+            &= \frac{\pi}{3}.
+    \end{align*}
+\end{ex}
+
+\end{document} 
