@@ -1,0 +1,334 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-09-30}
+
+\subsection{Densitet, massa och masscentrum (15.4)}
+Låt \(
+    D 
+\) vara en tunn skiva (lamina) som representeras av \(
+    D \subseteq \realn^2
+\) med densitet \(
+    \rho(x,y)
+\). \(
+    \rho(x,y)
+\) är gränsvärdet när \(
+    \epsilon \to 0
+\) för densiteten av en kvadrat \(
+    A_\epsilon
+\) med sidlängd \(
+    \epsilon
+\) och centrum i \(
+    (x,y)
+\). 
+
+Om \(
+    E
+\) är ett litet område kring punkten \(
+    (x,y)
+\) bör \(
+    \rho(x,y) 
+\) vara detsamma oberoende av \(
+    E
+\). För ett sådant område blir då 
+\begin{equation}\label{eq:mass}
+    \text{massa}(E) \approx \rho(x,y)\cdot \text{area}(E).
+\end{equation}
+
+M.h.a.\ \(
+    \rho
+\) vill vi beskriva massan på och masscentrum i \(
+    D
+\) ovan.
+
+\subsubsection{Massa}
+Vi börjar med att anta att \(
+    D
+\) är en rektangel med \(
+    \rho(x,y) = 0
+\) om \(
+    (x,y) \not\in D
+\). Då delar vi in \(
+    D
+\) i \(
+    M\times N
+\) stycken lika stora delrektanglar \(
+    R_{ij}
+\) där \(
+    i \in \{1, \dots, M\}
+\) och \(
+    j \in \{1, \dots, N\}
+\) med area \(
+    \Delta R
+\) och \(
+    (x_{ij}, y_{ij}) \in R_{ij}
+\). Om \(
+    M
+\) och \(
+    N
+\) är stora blir varje \(
+    R_{ij}
+\) litet, så att från ekvation~\ref{eq:mass}
+ovan får vi \(
+    \text{massa}(R_{ij}) \approx \rho(x_{ij}, y_{ij}) \cdot \Delta R 
+\). Total massan är då \(
+    m = \sum_{m=1}^M \sum_{n=1}^N \text{massa}(R_{ij})
+        \approx  \sum_{m=1}^M \sum_{n=1}^N \rho(x_{ij}, y_{ij}) \cdot \Delta R 
+        = \iint_D \rho(x, y) \dd A
+\). Uppskattningen för massan blir också bättre och bättre när \(
+    M, N \to \infty
+\). 
+
+\begin{sats}[Massa för område]
+    För en skiva \(
+        D \subseteq \realn^2
+    \) med densitet \(
+        rho(x,y)
+    \) i varje punkt \(
+        (x,y)
+    \) är den totala massan \(
+        m = \iint_D \rho(x,y) \dd A
+    \).
+
+    \begin{proof}
+        Bevis finns ovan.
+    \end{proof}
+\end{sats}
+
+\subsubsection{Masscentrum}
+\begin{defn}[Moment]
+    \emph{Momentet} med avseende på \(
+        x
+    \)-axeln kring en punkt \(
+        x = a
+    \) för en partikel med position \(
+        (x,y)
+    \) och massa \(
+        m
+    \) är \(
+        m (x-a)
+    \). 
+\end{defn}
+
+\begin{defn}[Jämvikt av moment]
+    En samling partiklar med positioner \(
+        (x_i, y_i)
+    \) och massor \(
+        m_i
+    \) där \(
+        i \in \{1, \dots, n\}
+    \) är i \emph{jämvikt} kring \(
+        x = a
+    \) om dess totala moment \(
+        \sum_{i=1}^n m_i (x_i - a) = 0
+    \).
+
+    Motsvarande definition funkar även i \(
+        y
+    \)-led.
+\end{defn}
+
+\begin{sats}[Totalt moment för en skiva och jämvikt]
+    Låt \(
+        D \subseteq \realn^2
+    \) vara en tunn skiva med densitet \(
+        \rho(x,y)
+    \).
+
+    Dess totala moment med avseende på \(
+        x
+    \)-axeln kring \(
+        x = a
+    \) är då \(
+        \iint_D (x-a)\rho(x,y) \dd A
+    \).
+
+    Samma sak funkar igen även för \(
+        y
+    \)-led.
+
+    Om \(
+        \iint_D (x-a)\rho(x,y) \dd A 
+            = \iint_D x \rho(x,y) \dd A - a \iint_D \rho(x,y) \dd A 
+            = 0
+    \) är skivan i jämvikt.
+
+    \begin{proof}
+        Härleds på samma sätt som för massan.
+    \end{proof}
+\end{sats}
+
+\begin{defn}[Moment kring \(x\)-axeln]
+    Momentet med avseende på \(
+        x
+    \)-axeln kring \(
+        x=0
+    \) är \(
+        M_x = \iint_D x \rho(x,y) \dd A
+    \).
+\end{defn}
+
+\begin{sats}[Masscentrum]
+    För en skiva \(
+        D \subseteq \realn^2
+    \) med densitet \(
+        \rho(x,y)
+    \) är dess \emph{masscentrum} \(
+        (\overline{x}, \overline{y})
+    \) där \(
+        \overline{x} = \frac{M_x}{m} = \inv{m} \iint_D x \rho(x,y) \dd A
+    \) och \(
+        \overline{y} = \frac{M_y}{m} = \inv{m} \iint_D y \rho(x,y) \dd A
+    \).
+\end{sats}
+
+\begin{ex}
+    Beräkna massan och masscentrum för triangeln \(
+        D
+    \) med hörn i \(
+        (0,0)
+    \), \(
+        (1,0)
+    \) och \(
+        (0,1)
+    \) med konstant densitet \(
+        \rho(x,y) = 1
+    \).
+
+    \(
+        m = \iint_D \rho(x,y) \dd A
+            = \iint 1 \dd A
+            = \half
+    \).
+
+    För att räkna ut \(
+        M_x
+    \) måste vi kunna beskriva randerna till \(
+        D
+    \). Vi noterar att hypotenusan till triangeln beskrivs av \(
+        y = 1-x
+    \) så att \(
+        D \{ (x,y) \; | \; 0 \leq x \leq 1, 0 \leq y \leq 1-x\}
+    \) och därmed 
+    \begin{align*}
+        M_x &= \iint_D x \rho(x,y) \dd A\\
+            &= \iint_d x \dd A\\
+            &= \int_0^1 \int_0^{1-x} x \dd y \dd x\\
+            &= \int_0^1 x \int_0^{1-x} 1 \dd y \dd x \\
+            &= \int_0^1 x\cdot(1-x) \dd x \\
+            &= \int_0^1 x-x^2 \dd x  \\
+            &= \left[ \frac{x^2}{2} - \frac{x^3}{3} \right]_0^1  \\
+            &= \half - \inv{3}  \\
+            &= \inv{6}.
+    \end{align*}
+
+    Då har vi \(
+        x
+    \)-koordinaten för masscentrum \(
+        \overline{x} = \frac{M_x}{m} = \frac{M_x}{\half} = \frac{\inv{6}}{\inv{2}} = \inv{3}
+    \).
+
+    I och med att triangeln är symmetrisk måste \(
+        M_y = M_x = \inv{3}
+    \) och därmed är masscentrum \(
+        (\overline{x}, \overline{y}) = (\inv{3}, \inv{3})
+    \). Man kan självklart räkna ut \(
+        M_y
+    \) på samma sätt, men det behövs inte här.
+\end{ex}
+
+\begin{sats}[Masscentrum för triangel]
+    I en triangel, om densiteten är konstant, är masscentrumet skärningspunkten
+    för triangelns medianer, d.v.s.\ linjerna från triangelns hörn till mitten
+    av motstående sida.
+\end{sats}
+
+\subsection{Medelvärden}
+\begin{sats}[Medelvärde av en funktion]
+    Låt \(
+        f(x,y)
+    \) vara definierad på en mängd \(
+        D \subseteq \realn^2
+    \). Då är dess \emph{medelvärde} \(
+        \frac{\iint_D f(x,y) \dd A}{\iint_D 1 \dd A}
+        = \frac{\iint_D f(x,y) \dd A}{\text{area}(D)} 
+    \).
+\end{sats}
+
+Speciellt, om \(
+    D
+\) är en skiva med konstant densitet \(
+    \rho(x,y) = 1
+\) är komponenterna i dess masscentrum \(
+    (\overline{x}, \overline{y})
+\) medelvärdet av \(
+    x
+\) och \(
+    y
+\) på \(
+    D
+\).
+
+\subsection{Arean av grafen till en funktion (15.5)}
+Låt \(
+    f(x,y)
+\) vara definierad på \(
+    D
+\), då ger den en yta (dess graf) \(
+    z=f(x,y)
+\) där \(
+    (x,y) \in D
+\). 
+
+\begin{sats}[Arean av en graf]
+    \(
+        A = \iint_D \sqrt{1+f_x^2 + f_y^2} \dd A
+    \).
+
+    \begin{proof}
+        Inte idag. % Beviset lämnas som övning till läsaren.
+    \end{proof}
+\end{sats}
+
+Jämför med längden av en graf \(
+    y=f(x)
+\) där \(
+    a \leq x \leq b
+\): \(
+    L = \int_a^b \sqrt{1+{f'(x)}^2} \dd x
+\).
+
+Nästa vecka pratar vi om en formel för mer allmänna ytor och kort om varför
+den ser ut som den gör.
+
+\begin{ex}
+    Bestäm arean av grafen \(
+        z = f(x,y)
+    \) där \(
+        (x,y) \in D
+    \), \(
+        f(x,y) = \frac{2}{3}( x^{\frac{3}{2}} + y^{\frac{3}{2}} )
+    \) och \(
+        D = [0,1] \times [0,2]
+    \).
+
+    \(
+        f_x = \frac{2}{3} \frac{3}{2} x^{\half} = \sqrt{x}
+    \). På samma sätt blir \(
+        f_y = \sqrt{y}
+    \).
+
+    \(
+        \sqrt{ 1 + f_x^2 + f_y^2 } = \sqrt{1 + \sqrt{x}^2 + \sqrt{y}^2} 
+            = \sqrt{1+x+y} 
+    \) ger \(
+        A \iint_D \sqrt{1+x+y} \dd A
+            = \int_0^1 \int_0^2 \sqrt{1+x+y} \dd y \dd x
+            = \cdots = \frac{4}{15} (33 - 4 \sqrt{2} - 9 \sqrt{3})
+    \).
+\end{ex}
+
+\end{document} 
