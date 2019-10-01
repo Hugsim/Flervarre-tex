@@ -1,0 +1,206 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-10-01}
+
+\subsection{Trippelintegraler}
+\begin{defn}[Trippelintegraler]
+    Låt \(
+        E \subseteq \realn^3
+    \) vara ett område och \(
+        g(x,y,z)
+    \) vara definierad på \(
+        E
+    \).   
+    
+    Då definierar vi trippelintegralen av \(
+        g
+    \) över \(
+        E
+    \): \[
+        \iiint_E g(x,y,z) \dd V 
+    \] på samma sätt som dubbelintegraler, först när \(
+        E = [a,b]\times [c,d] \times [e,f]
+    \) är ett rätblock m.h.a.\ Riemannsummor och sedan för allmänna 
+    begränsade områden genom att reducera till fallet med rätblock. 
+\end{defn}
+
+\subsubsection{Upprepad integration i trippelintegraler}
+Vi antar att de funktioner vi använder är kontunierliga s.a.\ integralerna 
+existerar. Annars blir det svårt.
+
+Om \(
+    E = \{ (x,y,z) \; | \; (x,y) \in D, \;e(x,y) \leq z \leq f(x,y) \}
+\) där \(
+    D \subseteq \realn^2
+\) är \(
+    \iiint_E g(x,y,z) \dd V = \iint_D \int_{e(x,y)}^{f(x,y)} g(x,y,z) \dd z \dd A
+\). 
+
+Om \(
+    D = \{ (x,y) \; | \; a \leq x \leq b, \; c(x) \leq y \leq d(x) \}
+\) (är ett typ I-område) är \(
+    E = \{ (x,y,z) \; | \; a\leq x \leq b, \; c(x) \leq y \leq d(x) ,\;e(x,y) \leq z \leq f(x,y) \}
+\). Då är integralen \[
+    \iiint_E g(x,y,z) \dd A = \int_a^b \int_{c(x)}^{d(x)} \int_{e(x,y)}^{f(x,y)} g(x,y,z) \dd z \dd y \dd x.
+\] 
+
+Motsvarande formler fås om vi byter roller på variablerna. 
+
+\begin{ex}
+    Beräkna \(
+        \iiint_E z \dd V
+    \) där \(
+        E 
+    \) är den tetraeder som begränsas av planen \(
+        x = 0
+    \), \(
+        y = 0
+    \), \(
+        z = 0
+    \) och \(
+        2x + y + z = 2
+    \).
+
+    Området mellan ett antal ytor som bestäms av likheter beskrivs typiskt 
+    sett av motsvarande olikheter. (D.v.s.\ byt \(
+        =
+    \) mot \(
+        \geq \text{ el. } \leq
+    \).) Men vilket håll ska olikheten vara på? Brukar funka att rita en 
+    figur. För att göra det enklare att rita kollar vi var den skär de tre axlarna.
+    För \(
+        x
+    \)-axeln får vi när \(
+        y = z = 0
+    \). Då är \(
+        2x + 0 + 0 = 2 \implies x = 1
+    \) och därmed innehåller planet punkten \(
+        (1,0,0)
+    \). På motsvarande sätt får vi \(
+        y = 2
+    \) och \(
+        z = 2
+    \) och punkterna \(
+        (0,2,0)
+    \) och \(
+        (0,0,2)
+    \). Då får vi följande utritade tetraeder: 
+
+    \f
+
+    För att beskriva \(
+        E
+    \) med olikheter får vi \(
+        E = \{ (x,y,z) \; | \; x \geq 0,\; y \geq 0,\; z \geq 0,\; 2x+y+z \leq 0 \}
+    \). Hållen på olikheterna fås genom att kolla punkter i tetraedern. 
+    Ex.\ får vi i punkten \(
+        (0,0,0)
+    \) som ligger i tetraedern \(
+        2\cdot 0 + 0 + 0 = 0 
+    \) i origo, och \(
+        0 \leq 2
+    \).
+
+    Genom att kombinera de två sista olikheterna fås \(
+        0 \leq z \leq 2 - 2x - y
+    \). För att det ska finnas sådana \(
+        (x,y,z)
+    \) måste \(
+        x \geq 0
+    \), \(
+        y \geq 0 
+    \) och \(
+        2-2x-y \geq 0
+    \). Då får vi följande område:
+
+    \f
+
+    Då får vi att \(
+        E = \{ (x,y,z) \; | \; 0 \leq x \leq 1, \; 0 \leq y \leq 2 - 2x, \; 0 \leq z \leq 2 - 2x - y \}
+    \). Nu kan vi till slut integrera! 
+
+    \begin{align*}
+        \iiint_E z \dd V &= \int_0^1 \int_0^{2-2x} \int_0^{2-2x-y} z \dd z \dd y \dd x \\
+                         &= \int_0^1 \int_0^{2-2x} \left[\frac{z^2}{2} \right]_0^{2-2x-y} \dd y \dd x \\
+                         &= \half \int_0^1 \int_0^{2-2x} (2-2x-y)^2 \dd y \dd x \\
+                         &= \half \int_0^1 \left[ \frac{(2-2x-y)^3}{-3} \right]_{y = 0}^{2-2x} \dd x \\
+                         &= \inv{6} \int_0^1 (2-2x)^3 \dd x \\
+                         &= \inv{6} \left[ \frac{(2-2x)^4}{4\cdot(-2)} \right]_0^1 \\
+                         &= \inv{6} \cdot \frac{2^4}{4\cdot 2} \\
+                         &= \inv{3}.
+    \end{align*}
+\end{ex}
+
+\dquote{Fyra plus två plus två blir åtta.}{Randomsnubbe om trivialiteter}
+
+\subsection{Cylindriska koordinater och trippelintegraler (15.7)}
+Cylindriska koordinater betecknas \(
+    (r,\theta,z) \in \realn^3
+\) och fås genom att byta ut \(
+    (x,y)
+\) mot de polära koordinaterna \(
+    (r,\theta)
+\), d.v.s.\ \(
+    \left\{\begin{matrix}
+        x = r \cos(\theta)\\ 
+        y = r \sin(\theta)\\ 
+        z = z
+    \end{matrix}\right.
+\). Om vi har ett område \(
+    E = \{ (x,y,z) \; | \; (x,y) \in D, \; e(x,y) \leq z \leq e(x,y) \}
+\) där \(
+    D \subseteq \realn^2 
+\) är en polär rektangel med \(
+    a \leq r \leq b
+\) och \(
+    \alpha \leq \theta \leq \beta 
+\) följer av formlerna för upprepad integration av trippelintegraler och 
+formeln för integration i polära koordianter för dubbelintegraler att \[
+    \iiint_E g(x,y,z) \dd V = \int_a^b \int_\alpha^\beta \int_{e(r\cos(\theta), r\sin(\theta))}^{f(r\cos(\theta), r\sin(\theta))} g(r\cos(\theta), r\sin(\theta)) r \dd z \dd \theta \dd r.
+\] 
+Kort säger man ofta att \(
+    \dd V = r \dd z \dd \theta \dd r
+\).
+
+\begin{ex}
+    Beräkna \(
+        \iiint_E z \dd V
+    \) där \(
+        E 
+    \) är området mellan konen \(
+        x^2+y^2=z^2
+    \), \(
+        z \geq 0
+    \) och planet \(
+        z = 1
+    \). 
+
+    Vi såg förra veckan att om vi låter \(
+        D = \{ (x,y) \; | \; x^2+y^2\leq 1\}
+    \) är \(
+        E = \{ (x,y,z) \; | \; (x,y) \in D,\; \sqrt{x^2+y^2}\leq z \leq 1 \}
+    \). \(
+        D 
+    \) ges i polära koordinater av \(
+        0 \leq r \leq 1
+    \) och \(
+        0 \leq \theta \leq 2\pi
+    \). 
+
+    Då får vi  
+    \begin{align*}
+        \iiint_E z \dd V &= \int_0^1 \int_0^{2\pi} \int_r^1 z \dd z r \dd \theta \dd r \\
+                         &= \int_0^1 \int_0^{2\pi} \left[ \frac{z^2r}{2}  \right]_{z=r}^1 \dd \theta \dd r \\
+                         &= \half \int_0^1 \int_0^{2\pi} r - r^3 \dd r \dd \theta \dd r \\
+                         &= \pi \int_0^1 r - r^3 \dd r \\
+                         &= \pi \left[ \frac{r^2}{2} - \frac{r^4}{4} \right]_0^1 \\
+                         &= \pi \left( \half - \inv{4} \right) \\
+                         &= \frac{\pi}{4}.
+    \end{align*}
+\end{ex}
+
+\end{document} 
