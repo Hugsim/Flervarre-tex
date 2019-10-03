@@ -1,0 +1,242 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-10-03}
+
+\subsection{Sfäriska koordinater och trippelintegraler (15.8)}
+Kom ihåg att en punkt \(
+    (x,y)
+\) i planet kan beskrivas i polära koordinater med ett avstånd \(
+    r = \sqrt{x^2+y^2}
+\) från origo och en vinkel \(
+    \theta 
+\) från positiva \(
+    x
+\)-axeln. 
+
+\begin{defn}[Sfäriska koordinater]
+    En punkt \(
+        \xyz
+    \) i rummet kan beskrivas med ett avstånd \(
+        \rho
+    \) till origo och två vinklar, vanligtvis \(
+        \theta
+    \) till positiva \(
+        x
+    \)-axeln i \(
+        xy
+    \)-planet och \(
+        \phi
+    \), vinkeln till positiva \(
+        z
+    \)-axeln. \(
+        (\rho, \theta, \phi)
+    \) kallas \emph{sfäriska koordinater} och ges av \(
+        \left\{\begin{matrix}
+            x = \rho \sin(\phi)\cos(\theta) \\
+            y = \rho \sin(\phi)\sin(\theta) \\
+            z = \rho \cos(\phi)
+        \end{matrix}\right.
+    \). 
+    
+    Man brukar kräva att \(
+        \rho \geq 0
+    \), \(
+        0 \leq \phi \leq \pi
+    \) och oftast antingen \(
+        0 \leq \theta \leq 2\pi
+    \) eller \(
+        -\pi \leq \theta \leq \pi
+    \).
+
+    \begin{proof}[Härledning]
+        ~\\
+        \begin{enumerate}
+            \item Vi börjar med punkten \(
+                P_0 = (0,0,\rho)
+            \) som ligger rakt upp från origo. Den har \(
+                \rho 
+            \) rätt, \(
+                \phi = 0
+            \) och \(
+                \theta
+            \) odefinierat.
+
+            \item Om vi roterar punkten i \(
+                xz
+            \)-planet får vi \(
+                P_1 = (\rho \sin(\phi), 0, \rho \cos(\phi))
+            \). Den har \(
+                \rho 
+            \) rätt, \(
+                \phi
+            \) rätt och \(
+                \theta = 0
+            \) eftersom den ligger rakt över \(
+                x
+            \)-axeln.
+
+            \item Om vi roterar i \(
+                xy
+            \)-planet får vi \(
+                (\rho \sin(\phi)\cos(\theta), \rho \sin(\phi)\sin(\theta), \rho \cos(\phi))
+            \).
+        \end{enumerate}
+    \end{proof}
+\end{defn}
+
+\begin{sats}[Formel för integration i sfäriska koordinater]
+    Om \(
+        E 
+    \) är en \enquote{sfärisk låda}, d.v.s.\ att \(
+        a \leq \rho \leq b
+    \), \(
+        \alpha \leq \theta \leq \beta
+    \) och \(
+        c \leq \phi \leq d
+    \) är \[
+        \iiint_E f\xyz \dd V = \int_\alpha^\beta \int_a^b \int_c^d f(\rho \sin(\phi)\cos(\theta), \rho \sin(\phi)\sin(\theta), \rho \cos(\phi)) \rho^2 \sin(\phi) \; \dd \phi \dd \rho \dd \theta.
+    \] 
+
+    Det brukar sammanfattas som \[
+        \dd V = \rho^2 \sin(\phi) \; \dd \phi \dd \rho \dd \theta.
+    \] 
+
+    \begin{proof}
+        Kort idé till varför finns i avsnitt 15.8 i boken.
+    \end{proof}
+\end{sats}
+
+\begin{ex}
+    Beräkna \(
+        \iiint_E {(x^2+y^2+z^2)}^2 \dd V
+    \) där \(
+        E
+    \) är området som ligger ovanför konen \(
+        z = \sqrt{x^2+y^2}
+    \) och innanför sfären \(
+        x^2+y^2+z^2 = 4
+    \).
+
+    \f
+
+    Vinkeln \(
+        \phi
+    \) mot positiva \(
+        z
+    \)-axeln är \(
+        \frac{\pi}{4} 
+    \) eftersom om man bara kollar i \(
+        xz
+    \)-planet beskrivs linjen som \(
+        z = x
+    \) vilken har vinkeln \(
+        \frac{\pi}{4} 
+    \) mot \(
+        z
+    \)-axeln. Området ovanför konen ges då av att \(
+        0 \leq \phi \leq \frac{\pi}{4} 
+    \). Sfären \(
+        x^2+y^2+z^2 = 4
+    \) ges av \(
+        \rho = 2
+    \), då är området innanför sfären \(
+        0 \leq \rho \leq 2
+    \). Vi har inga villkor på \(
+        \theta
+    \), alltså är \(
+        0 \leq \theta \leq 2\pi
+    \). Alltså ges \(
+        E
+    \) i sfäriska koordinater av att \(
+        0 \leq \rho \leq 2
+    \), \(
+        0 \leq \phi \leq \frac{\pi}{4} 
+    \) och \(
+        0 \leq \theta \leq 2\pi
+    \). 
+
+    Integralen är då 
+    \begin{align*}
+        \iiint_E {(x^2+y^2+z^2)}^2 \dd V &= \int_0^{2\pi} \int_0^2 \int_0^{\frac{\pi}{4}} {\rho^2}^2 \rho^2 \sin(\phi) \dd \phi \dd \rho \dd \theta \\
+            &= \int_0^{2\pi} \int_0^2 \rho^6 \left[ -\cos(\phi) \right]_0^{\frac{\pi}{4}}  \dd \rho \dd \theta \\
+            &= \int_0^{2\pi} \int_0^2 \rho^6 (- \cos(\frac{\pi}{4}) - \cos(0)) \dd \rho \dd \theta \\
+            &= (- \cos(\frac{\pi}{4}) - \cos(0)) \int_0^{2\pi} \left[ \frac{\rho^7}{7} \right]_0^2 \dd \theta \\
+            &= (1 - \frac{1}{\sqrt{2}} ) \int_0^{2\pi} \frac{2^7}{7}  \dd \theta \\
+            &= (1 - \frac{1}{\sqrt{2}} )  \frac{2^7}{7} \int_0^{2\pi} 1 \dd \theta \\
+            &= (1 - \frac{1}{\sqrt{2}} )  \frac{2^7}{7} \cdot 2\pi \\
+            &= (1 - \frac{1}{\sqrt{2}} ) \frac{2^8 \pi}{7} 
+    \end{align*}
+\end{ex}
+
+\subsection{Vektorfält (16.1)}
+Hittils har vi studerat funktioner 
+\begin{enumerate}
+    \item \(
+        \realn^n \to \realn
+    \) 
+
+    \item \(
+        \realn \to \realn^n
+    \) 
+\end{enumerate}
+
+Det är naturligt att också studera funktioner \(
+    \realn^n \to \realn^m
+\).
+
+\begin{defn}[Vektorfält]
+    Ett \emph{vektorfält} på \(
+        D \subseteq \realn^n
+    \) där \(
+        n \in \intn
+    \) är en funktion \(
+        \ve{F} :\; D \to \realn^n
+    \), d.v.s.\ att för varje \(
+        (x,y) \in D
+    \) ger det en vektor \(
+        \ve{F} (x,y) \in \realn^n
+    \).
+\end{defn}
+
+Vektorfält dyker ofta upp i fysikaliska tillämpningar, t.ex.\ 
+\begin{enumerate}
+    \item Ett \emph{hastighetsfält} \(
+        \ve{v} 
+    \) är ett vektorfält där \(
+        \ve{v} (x,y)
+    \) representerar hastigheten i punkten \(
+        (x,y)
+    \) av något som rör sig med varierande hastighet, t.ex.\ en gas eller 
+    en vätska. 
+
+    \item Ett \emph{kraftfält} \(
+        \ve{F} 
+    \) är ett vektorfält där \(
+        \ve{F} (x,y)
+    \) representerar kraften på en partikel i punkten \(
+        (x,y)
+    \), t.ex.\ ett gravitationsfält eller 
+    ett elektriskt fält. 
+\end{enumerate}
+
+Ett viktigt matematiskt exempel är följande:
+
+\begin{defn}[Gradientfält]
+    Om vi har en funktion \(
+        f: \; D \to \realn
+    \), \(
+        D \realn^2 
+    \) så är dess \emph{gradientfält} \[
+        \nabla f(x,y) = \lang f_x(x,y), f_y(x,y)\rang.
+    \] 
+
+    Motsvarande funkar även i \(
+        \realn^3
+    \).
+\end{defn} 
+
+\end{document} 
