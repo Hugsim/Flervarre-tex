@@ -1,0 +1,303 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-10-04}
+
+\subsection{Kurvintegraler (16.2)}
+\begin{defn}[Kurvintegraler]
+    Låt \(
+        C
+    \) vara en kurva med en parametrisering \(
+        \ve{r} (t)
+    \) där \(
+        a \leq t \leq b
+    \) och \(
+        \ve{r} 
+    \) är glatt (smooth), d.v.s.\ att \(
+        \ve{r} '(t)
+    \) existerar och är kontinuerlig. Låt också \(
+        f(x,y)
+    \) vara definierad på hela \(
+        C
+    \).
+
+    \emph{Kurvintegralen} av \(
+        f
+    \) längs \(
+        C
+    \) är då arean under grafen \(
+        f(x,y)
+    \) när \(
+        (x,y)
+    \) går längs \(
+        C
+    \).
+
+    Formeln för att räkna ut kurvintegralen av \(
+        f
+    \) längs \(
+        C
+    \) (givet att \(
+        f
+    \) är kontinuerlig på \(
+        C
+    \)) är \[
+        \int_C f \dd s = \int_a^b f(\ve{r} (t)) \abs{\ve{r} '(t)} \dd t.
+    \] 
+
+    \begin{proof}[Härledning]
+        Härledningen är lik härledningen för formeln för längden av kurvor.
+    \end{proof}
+\end{defn}
+
+Om \(
+    f = 1
+\) är ovanstående formeln för längden av en kurva. \(
+    \dd s
+\) brukar kallas \emph{längdelement}. Formeln brukar förkortas \(
+    \dd s = \abs{\ve{r} '(t)} \dd t
+\) vilket också är vad som används i formelbladet.
+
+\begin{anm}
+    Formeln för kurvintegraler är i termer av en parametrisering \(
+        \ve{r} (t)
+    \) av en kurva \(
+        C
+    \) men i själva verket beror inte integralen av parametriseringen 
+    utan bara på \(
+        C
+    \), d.v.s.\ punkterna \(
+        \{ \ver(t) \; | \; a \leq t \leq b \}
+    \). Man kan därför välja vilken parametrisering som helst av \(
+        C
+    \).
+\end{anm}
+
+\begin{ex}
+    Övre halvan av enhetscirkeln kan t.ex.\ parametriseras med \(
+        \ver_1 (t) = \lang \cos(t), \sin(t) \rang 
+    \), \(
+        0 \leq t \leq 2\pi
+    \) eller \(
+        \ver_2 (t) = \lang t, \sqrt{1-t^2}\rang 
+    \), \(
+        -1 \leq t \leq 1
+    \). Båda funkar för att kurvintegrera över.
+\end{ex}
+
+\begin{sats}[Massa och masscentrum för en kurva]
+    På liknande sätt som tidigare kan man härleda att om en tråd med densitet
+    \(
+        \rho(x,y)
+    \) går längs en kurva \(
+        C
+    \) är dess massa \[
+        m = \int_C \rho \dd s
+    \] och dess masscentrum \[
+        (\overline{x}, \overline{y}) = \left( \frac{M_x}{m}, \frac{M_y}{m} \right)
+    \] där \(
+        M_x = \int_C x \rho(x,y) \dd s
+    \) och \(
+        M_y = \int_C y \rho(x,y) \dd s
+    \).
+\end{sats}
+
+\subsection{Kurvintegraler av vektorfält (16.2)}
+\begin{defn}[Arbete under konstant kraft]
+    I en dimension är \emph{arbetet} utfört av en konstant kraft \(
+        F
+    \) på en partikel som förflyttar sig sträckan \(
+        d
+    \) är \[
+        W = F \cdot d.
+    \] Det kan vara både positivt och negativt beroende på riktningarna på termerna.
+
+    I två/tre dimensioner, om en konstant kraft \(
+        \ve{F} 
+    \) verkar på en partikel som förflyttas från en punkt \(
+        P
+    \) till en punkt \(
+        Q
+    \) blir arbetet som utförs \[
+        \ve{F} \sprod \ve{PQ}. 
+    \] 
+\end{defn}
+
+Anta att vi har en kurva \(
+    C
+\) som parametriseras av \(
+    \ver(t)
+\) där \(
+    a \leq t \leq b
+\) och \(
+    \ver
+\) är glatt. Om vi har ett kraftfält \(
+    \ve{F} (x,y)
+\) som varierar vill vi att kurvintegralen av \(
+    \ve{F} 
+\) längs \(
+    C
+\) ska ge arbetet som \(
+    \ve{F} 
+\) utför på en partikel som rör sig längs \(
+    C
+\) från \(
+    \ver(a)
+\) till \(
+    \ver(b)
+\). Med Riemannsummor kan man härleda följande formel, se kapitel 16.2 i boken 
+för härledning.
+
+\begin{defn}[Kurvintegral av ett vektorfält]
+    \emph{Kurvintegralen} av ett vektorfält \(
+        \ve{F} 
+    \) längs en kurva \(
+        C
+    \) som parametriseras av \(
+        \ver(t)
+    \) där \(
+        a \leq t \leq b
+    \) är \[
+        \int_C \ve{F} \sprod \dd \ver 
+            = \int_a^b \ve{F} (\ver(t)) \sprod \ver'(t) \dd t. 
+    \] 
+
+    Det brukar förkortas som \(
+        \dd \ver(t) = \ver'(t) \dd t
+    \) vilket är hur det skrivs på formelbladet.
+\end{defn}
+
+\begin{ex}
+    Beräkna arbetet som utförs av kraftfältet \(
+        \ve{F} = \lang 0, -2y \rang
+    \) på en partikel som rör sig längs en kurva \(
+        C 
+    \) som ges av \(
+        \ver(t) = \lang \cos(t), \sin(t)\rang
+    \) när \(
+        0 \leq t \leq \frac{\pi}{2} 
+    \).
+
+    Arbetet ges av \(
+        W = \int_C \ve{F} \sprod \dd \ver
+    \). Vi börjar med att räkna ut \(
+        \ve{F}(\ver(t)) = \ve{F}(\cos t, \sin t) = \lang 0, -2\sin t\rang 
+    \) och \(
+        \ver'(t) = \lang - \sin t, \cos t\rang
+    \). Då får vi att \(
+        \ve{F}(\ver(t)) \sprod \ver'(t) = 0 \cdot (-\sin t) + (-2 \sin t \cos t)
+            = -\sin(2t)
+    \).
+
+    Arbetet blir då 
+    \begin{align*}
+        W &= \int_C \ve{F} \sprod \dd \ver \\
+          &= \int_0^{\frac{\pi}{2}} \ve{F}(\ver(t)) \sprod \ver'(t) \dd t \\
+          &= \int_0^{\frac{\pi}{2}} -\sin(2t) \dd t \\
+          &= \qty[ \frac{\cos(2t)}{2}]_0^{\frac{\pi}{2}} \\
+          &= \frac{\cos(\pi) - \cos(0)}{2} \\
+          &= -1. 
+    \end{align*}
+\end{ex}
+
+\subsection{Huvudsatsen för kurvintegraler (16.3)}
+\begin{sats}[Huvudsatsen för kurvintegraler]
+    Anta att \(
+        C
+    \) är en kurva som ges av \(
+        \ver(t)
+    \) när \(
+        a \leq t \leq b
+    \) och att \(
+        f
+    \) är en funktion så att \(
+        \grad f 
+    \) är kontinuerlig längs \(
+        C
+    \). 
+    
+    Då är \[
+        \int_C \grad f \sprod \dd \ver = f(\ver(b)) - f(\ver(a)).
+    \] 
+
+    Om \(
+        \ver(t) = \lang t, 0\rang
+    \) och om \(
+        f
+    \) bara beror på \(
+        x
+    \) blir detta integralkalkylens fundamentalsats.
+
+    \begin{proof}
+        Satsen i allmännhet följer av specialfallet ovan och av kedjeregeln. 
+        Beviset finns i kapitel 16.3 i boken.
+    \end{proof}
+\end{sats}
+
+\begin{defn}[Konservativa vektorfält och potential]
+    Ett vektorfält \(
+        \ve{F}
+    \) är \emph{konservativt} om \(
+        \ve{F} = \grad f
+    \) för någon funktion \(
+        f
+    \). \(
+        f
+    \) kallas för en \emph{potential} till \(
+        \ve{F}
+    \).
+\end{defn}
+
+Konservativa vektorfält är alltså lätta att integrera. Men hur avgör man om ett
+vektorfält är konservativt? 
+
+\begin{sats}[Villkor för konservativa vektorfält]
+    Om vi antar att vi har ett konservativt vektorfält \(
+        \ve{F} = \lang P, Q\rang = \grad f = \lang f_x, f_y\rang
+    \) och att \(
+        f
+    \) har kontinuerliga partiella andraderivator så är \(
+        \pdv{P}{y} = \pdv{y}(f_x) = f_{xy} = f_{yx} = \pdv{x}(f_y) = \pdv{Q}{x}
+    \).
+
+    Alltså måste \[
+        \pdv{Q}{x} = \pdv{P}{y}
+    \] om \(
+        \ve{F}
+    \) är konservativt.
+\end{sats}
+
+Vi ska nu se att villkoret ibland medför att \(
+    \ve{F}
+\) är konservativt. 
+
+\begin{defn}[Sluten kurva]
+    En \emph{sluten} (closed) kurva börjar och slutar i samma punkt.
+\end{defn}
+
+\begin{defn}[Enkel kurva]
+    En \emph{enkel} kurva (simple) korsar aldrig sig själv.
+\end{defn}
+
+\begin{defn}[Enkelt sammanhängande mängd]
+    En mängd \(
+        D
+    \) är \emph{enkelt sammanhängande} om den 
+    \enquote{inte innehåller några hål}. Mer precist säger vi att för alla 
+    enkla slutna kurvor \(
+        C
+    \) i \(
+        D \subseteq \realn^2
+    \) ligger alla punkter innanför \(
+        C
+    \) också i \(
+        D
+    \).
+\end{defn}
+
+
+
+\end{document} 
