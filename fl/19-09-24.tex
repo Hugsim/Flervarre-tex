@@ -6,7 +6,128 @@
 \providecommand\fname{}
 \renewcommand\fname{19-09-24}
 
-Missade föreläsningen, handlade om dubbelintegraler över rektanglar och 
-upprepad integration.
+\begin{sats}[Volym under graf]
+    Anta att \(
+        f
+    \) är en funktion definierad på en mängd \(
+        D = [a,b] \times [c\times d] = \{ (x,y) \; | \; a \leq x \leq b, \; c \leq y \leq d \}
+    \).
+
+    Volymen under grafen \(
+        z = f(x,y)
+    \) är då \(
+        \iint_D f(x,y) \dd A
+    \).
+
+    \begin{proof}
+        Dela in \(
+            D
+        \) i \(
+            m \times n
+        \) stycken lika stora rektanglar \(
+            A_{ij}
+        \) med area \(
+            \Delta A = \frac{b-a}{m} \frac{d-c}{n}
+        \) och låt punkten \(
+            (x_{ij}, y_{ij}) \in A_{ij}
+        \). Då är volymen under grafen ungefär \(
+            \sum_{i=1}^m \sum_{j=1}^n f(x_{ij}, y_{ij}) \Delta A
+        \).
+
+        \begin{defn}[Integrerbarhet]
+            Vi låter \(
+                \iint_D f(x,y) \dd A = \lim_{m,n \to \infty} \sum_{i=1}^m \sum_{j=1}^n f(x_{ij}, y_{ij}) \Delta A
+            \) om gränsvärdet existerar. Då säger vi att \(
+                f
+            \) är integrerbar.
+        \end{defn}
+
+        Om \(
+            f(x,y) \geq 0
+        \) och \(
+            f
+        \) är integrerbar är volymen mellan \(
+            D
+        \) och \(
+            z = f(x,y)
+        \) då \(
+            \iint_D f(x,y) \dd A
+        \).
+    \end{proof}
+\end{sats}
+
+\begin{sats}[Krav för integrerbarhet]
+    Om en funktion \(
+        f
+    \) är kontinuerlig på en mängd \(
+        D
+    \) är \(
+        f
+    \) integrerbar på \(
+        D
+    \).
+\end{sats}
+
+\begin{sats}[Fubinis sats]
+    Om \(
+        f(x,y)
+    \) är kontinuerlig på \(
+        D = [a,b] \times [c, d]
+    \) är \[
+        \iint_D f(x,y) \dd A = \int_a^b \int_c^d f(x,y) \dd y \dd x 
+            = \int_c^d \int_a^b f(x,y) \dd x \dd y.
+    \]
+
+    \begin{proof}[Idé]
+        Idén bakom satsen är att i två variabler är volymen integralen
+        av tvärsnittsarean, likt att arean är integralen av höjden 
+        i en variabel. Integralen av tvärsnittsarean borde bli
+        samma oberoende av vilket håll vi tar tvärsnittsarean.
+    \end{proof}
+\end{sats}
+
+\begin{defn}[Dubbelintegral över begränsade områden]
+    Låt \(
+        f(x,y)
+    \) vara definierad på ett begränsat område \(
+        D \subseteq \realn^2
+    \). Låt också \(
+        R
+    \) vara en rektangel som helt innehåller \(
+        D
+    \) och definiera \(
+        F(x,y) = \left\{ 
+        \begin{matrix}
+            f(x,y) \text{ om } (x,y) \in D \\ 
+            0 \text{ annars}
+        \end{matrix}\right.
+    \). Då definierar man \(
+        \iint_D f(x,y) \dd A = \iint_R F(x,y) \dd A
+    \) om \(
+        F
+    \) är integrerbar.
+
+    Eftersom \(
+        F(x,y) = f(x,y)
+    \) på hela \(
+        D
+    \) och \(
+        F(x,y) = 0
+    \) utanför \(
+        D
+    \) så borde volymen mellan \(
+        z = f(x,y)
+    \) och \(
+        D
+    \) vara samma som volymen mellan \(
+        z = F(x,y)
+    \) och \(
+        R
+    \) och bör därför vara en rimlig definition av en integral av \(
+        f
+    \) över \(
+        D
+    \).
+\end{defn}
 
 \end{document} 

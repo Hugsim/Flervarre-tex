@@ -6,6 +6,62 @@
 \providecommand\fname{}
 \renewcommand\fname{19-09-25}
 
-Missade föreläsningen, handlade om dubbelintegraler över allmänna områden.
+\begin{defn}[Typ I-område]
+    Ett område \(
+        D \subseteq \realn^2
+    \) är av \emph{Typ I} om det kan skrivas som \(
+        D = \{ (x,y) \; | \; a \leq x \leq b, \; c(x) \leq y \leq d(x) \}
+    \) där \(
+        c(x)
+    \) och \(
+        d(x)
+    \) är kontinuerliga.
+\end{defn}
+
+\begin{defn}[Typ II-område]
+    Ett område \(
+        D \subseteq \realn^2
+    \) är av \emph{Typ II} om det kan skrivas som \(
+        D = \{ (x,y) \; | \; a(y) \leq x \leq b(y), \; c \leq y \leq d \}
+    \) där \(
+        a(x)
+    \) och \(
+        b(x)
+    \) är kontinuerliga.
+\end{defn}
+
+\begin{sats}
+    Om \(
+        D 
+    \) är ett område av typ I eller II och \(
+        f(x,y)
+    \) är kontinuerlig på \(
+        D
+    \) är \(
+        f
+    \) integrerbar. 
+
+    \begin{proof}
+        Anta att \(
+            D
+        \) är ett område av typ I och att \(
+            D \subseteq E = [a,b] \times [g,h]
+        \) så att \(
+            g \leq c(x) \; \forall \; x
+        \) och \(
+            h \geq d(x) \; \forall \; x
+        \). Då är 
+        \begin{align*}
+            \iint_D f(x,y) \dd A &= \iint_R F(x,y) \dd A \\
+                &= \int_a^b \int_g^h F(x,y) \dd y \dd x \\
+                &= \{ F(x,y) = 0 \text{ om } g \leq y \leq c(x) \text{ el. } d(x) \leq y \leq h \} \\
+                &= \int_a^b \int_{c(x)}^{d(x)} F(x,y) \dd y \dd x \\
+                &= \{ F(x,y) = f(x,y) \text{ om } (x,y) \in D \} \\
+                &= \int_a^b \int_{c(x)}^{d(x)} f(x,y) \dd y \dd x.
+        \end{align*}
+
+        Samma härledning gäller för typ II-områden.
+    \end{proof}
+\end{sats}
 
 \end{document} 
