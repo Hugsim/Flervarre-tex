@@ -1,0 +1,215 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-10-08}
+
+\subsection{Konservativa vektorfält (16.3)}
+\begin{sats}[Partiella derivator till vektorfält och konservativa vektorfält]
+    Låt \(
+        \ve{F} = \lang P, Q \rang 
+    \) vara ett vektorfält på en enkelt sammanhängande mängd \(
+        D \subseteq \realn^2
+    \) så att \(
+        \pdv{P}{y} = \pdv{Q}{x}
+    \). Då är \(
+        \ve{F} 
+    \) konservativt.
+
+    \begin{proof}
+        Bevisas med hjälp av Greens sats, vilket vi kommer in på snart.
+    \end{proof}
+\end{sats}
+
+\begin{anm}
+    Satsen gäller inte på mängder \(
+        D
+    \) som inte är enkelt sammanhängande. Viktigt att dubbelkolla när man räknar!
+\end{anm}
+
+\subsubsection{Metod för att hitta en potential om den existerar}
+Vi vill lösa ekvationssystemet \[
+    \left\{\begin{matrix}
+        f_x = P & \text{(i)} \\ 
+        f_y = Q & \text{(ii)} 
+    \end{matrix}\right.
+\] vilket görs genom att först ta en lösning till (i), d.v.s.\ 
+hittar en primitiv funktion \(
+    f_0
+\) till \(
+    P
+\) med avseende på \(
+    x
+\). Den allmänna lösningen till (i) är då \(
+    f(x,y) = f_0(x,y) + g(y)
+\). Den stoppar vi in i (ii) för att bestämma \(
+    g(y)
+\). Alltså är \(
+    Q = f_y \pdv{y}(f_0+g) = \pdv{y}(f_0) + g'(y) 
+        \iff g'(y) = Q - \pdv{y}(f_0) 
+        \iff g(y)
+\) är en primitiv funktion till \(
+    Q - \pdv{y}(f_0)
+\) med avseende på \(
+    y
+\). 
+
+\begin{obs}
+    I detta sista steget måste vi få att \(
+        Q - \pdv{y} f_0 
+    \) bara beror på \(
+        y
+    \), annars är något fel. Exempelvis att \(
+        \ve{F} 
+    \) inte är konservativt eller att man har räknat fel.
+\end{obs}
+
+\subsection{Greens formel (16.4)}
+\begin{defn}[Styckvis glatta kurvor]
+    En kurva \(
+        C
+    \) är \emph{styckvis glatt} om den kan delas in i ett antal glatta kurvor \(
+        C_1, \dots, C_n
+    \) där \(
+        C_i 
+    \) slutar där \(
+        C_{i+1}
+    \) börjar. 
+\end{defn}
+
+\begin{defn}[Kurvintegraler över styckvis glatta kurvor]
+    Om en kurva \(
+        C
+    \) är styckvis glatt definierar vi \(
+        \int_C f \dd s = \int_{C_1} f \dd s + \cdots + \int_{C_n} f \dd s
+    \) och \(
+        \int_C \ve{F} \sprod \dd \ve{r} = \int_{C_1} \ve{F} \sprod \dd \ve{r} + \cdots + \int_{C_n} \ve{F} \sprod \dd \ve{r} 
+    \).
+\end{defn}
+
+Vi antar i fortsättningen att våra kurvor är styckvis glatta. 
+
+Kom ihåg att kurvintegralen av ett vektorfält längs en kurva \(
+    C
+\) som parametriseras av \(
+    \ver(t)
+\) där \(
+    a \leq t \leq b
+\) beror på kurvan sedd som en \emph{orienterad kurva} som består av dess punkter 
+\(
+    \{ \ver(t) \; | \; a \leq t \leq b \}
+\) och riktningen man går längs kurvan. 
+\begin{defn}[Negationen av kurvor]
+    Kurvan \(
+        -C
+    \) består av samma punkter som \(
+        C
+    \) men går i motsatt riktning. Parametriseras t.ex.\ som \(
+        \ve{s}(t) = \ver(b-t) 
+    \) där \(
+        0 \leq t \leq b-a
+    \).
+\end{defn}
+
+Från definitionen av vektorfält följer då att \(
+    \int_{-C} \ve{F} \sprod \dd \ver = - \int_C \ve{F} \sprod \dd \ver
+\). (Däremot är \(
+    \int_{-C} f \dd s = \int_C f \dd s
+\).)
+
+\begin{defn}[Områden begränsade av en kurva]
+    Låt \(
+        C
+    \) vara en enkel sluten kurva. Då \emph{begränsar} \(
+        C
+    \) ett område \(
+        D
+    \), d.v.s.\ \(
+        C
+    \) är randen till \(
+        D
+    \).
+
+    Att visa detta är förvånansvärt komplicerat, det visades inte förrän en bit in
+    på 1900-talet.
+\end{defn}
+
+\begin{defn}[Kurvors orientation]
+    En enkel sluten kurva \(
+        C
+    \) är \emph{positivt orienterad} om den går moturs kring området den begränsar.
+    Man kan också säga att området alltid ligger till vänster när man går längs
+    \(
+        C
+    \):s riktning. Annars är den \emph{negativt orienterad} och då är \(
+        -C
+    \) positivt orienterad.
+\end{defn}
+
+\begin{defn}[Notation]
+    Anta att \(
+        C
+    \) ges av \(
+        \ver(t)
+    \) där \(
+        a \leq t \leq b
+    \). Låt också \(
+        \ve{F} = \lang P, Q\rang
+    \) och \(
+        \ver(t) = \lang x(t), y(t) \rang
+    \). Då skrivs \(
+        \int_C \ve{F} \sprod \dd \ver = \int_a^b \ve{F}(\ver(t)) \sprod \ver'(t) \dd t
+            = \int_a^b P(x(t), y(t)) x'(t) + Q(x(t), y(t))y'(t) \dd t
+    \) också som \(
+        \int_C P \dd x + Q \dd y
+    \), d.v.s.\ \(
+        \dd x = x'(t)
+    \) och \(
+        \dd y = y'(t)
+    \).
+\end{defn}
+
+\begin{sats}[Greens sats]
+    Om \(
+        C
+    \) är en enkel sluten positivt orienterad kurva som begränsar området \(
+        D
+    \) och \(
+        P
+    \) och \(
+        Q
+    \) har kontinuerliga partiella derivator är \[
+        \int_C P \dd x +  Q \dd y = \iint_D \pdv{Q}{x} - \pdv{P}{y} \dd A.
+    \] 
+
+    \begin{proof}
+        Den har liknande form som integralkalkylens fundamentalsats, båda formlerna
+        säger att integralen av en derivata på något område kan utryckas m.h.a.\ 
+        värden på randen. Beviset för satsen när \(
+            D
+        \) är ett typ I och ett typ II-område följer satsen relativt enkelt från 
+        integralkalkylens fundamentalsats och formeln för upprepad integration
+        för typ I och typ II-områden. Bokens 16.4 har mer specifikt bevis. 
+    \end{proof}
+\end{sats}
+
+Greens sats kan alltså användas för att beräkna kurvintegraler som dubbelintegraler 
+och tvärtom. 
+
+\begin{sats}[Greens formel och areor]
+    Om \(
+        \lang P, Q\rang = \lang -y, 0\rang
+    \), \(
+        \lang 0, x\rang
+    \) eller \(
+        \lang -\frac{y}{2} , \frac{x}{2}\rang 
+    \) är \(
+        \pdv{Q}{x} - \pdv{P}{y} = 1
+    \) så att \(
+        \text{area}(D) = \iint_D 1 = \int_C -y \dd x = \int_c x \dd y = \half \int -y \dd x + x \dd y 
+    \).
+\end{sats}
+
+\end{document} 
