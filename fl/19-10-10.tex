@@ -1,0 +1,235 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-10-10}
+
+\subsection{Parametriserade ytor (16.6)}
+En kurva \(
+    C
+\) har dimension \(
+    1
+\), d.v.s.\ den beskrivs med en parameter \(
+    \ver(t) 
+\). 
+
+\begin{defn}[Parametriserade ytor]
+    En \emph{parametriserad yta} \(
+        S
+    \) är alla punkter \(
+        \{ \ver(u,v) \; | \; (u,v) \in D \subseteq \realn^2 \}
+    \) där \(
+        \ver : D \to \realn^3
+    \) är en vektorvärd funktion. 
+\end{defn}
+
+En yta har då dimension \(
+    2
+\), d.v.s.\ den beskrivs av två parametrar \(
+    \ver(u,v)
+\). 
+
+Vi skriver ofta parametriseringen i sina komponenter \(
+    \ver(u,v) = \lang x(u,v), y(u,v), z(u,v) \rang
+\). 
+
+\begin{ex}
+    Låt \(
+        f : D \to \realn
+    \), \(
+        D \subseteq \realn^2
+    \). 
+
+    Då är grafen \(
+        z = f(x,y)
+    \) en parametriserad yta med \(
+        \ver(u,v) = \lang u, v, f(u,v) \rang
+    \). Dock brukar vi ofta istället skriva \(
+        \ver(x,y) = \lang x, y, f(x,y) \rang
+    \).
+\end{ex}
+
+\begin{ex}
+    Låt \(
+        g : [a,b] \to [0, \infty)
+    \). 
+
+    Då ges rotationsytan kring \(
+        z
+    \)-axeln med radien \(
+        g(z)
+    \) av \(
+        \ver(u,v) = \lang g(u) \cos v, g(u) \sin v, u\rang
+    \) där \(
+        (u,v) \in [a,b] \times [0, 2\pi]
+    \).
+
+    I cylindriska koordinater svarar det mot att \(
+        r = g(u) 
+    \), \(
+        \theta = v
+    \) och \(
+        z = u
+    \).
+
+    Vi kan också skriva \(
+        \ver(z, \theta) = \lang g(z) \cos \theta, g(z) \sin \theta, z\rang
+    \).
+\end{ex}
+
+\subsection{Tangentplan till parametriserade ytor (16.6)}
+
+
+    Låt \(
+        S
+    \) vara en yta som parametriseras av \(
+        \ver(u,v)
+    \). Fixera en punkt \(
+        \lang a, b, c\rang = \ver(u_0, v_0)
+    \) på \(
+        S
+    \). Låt också \(
+        \ver_u(u_0, v_0)
+    \) och \(
+        \ver_v(u_0,v_0)
+    \) vara de partiella derivatorna av \(
+        \ver
+    \) med avseende på \(
+        u
+    \) respektive \(
+        v
+    \) i \(
+        (u_0,v_0)
+    \). Kurvorna \(
+        \ver_1(u) = \ver(u,v_0) 
+    \) och \(
+        \ver_2(v) = \ver(u_0, v)
+    \) ligger då i \(
+        S
+    \) och deras tangentvektorer i \(
+        u_0
+    \) respektive \(
+        v_0
+    \) är de partiella derivatorna ovan. 
+
+    \f
+
+\begin{defn}[Glatta (smooth) ytor i en punkt]
+    En yta \(
+        S
+    \) är \emph{glatt} i \(
+        \ver(u_0, v_0)
+    \) om \(
+        \ver_u(u_0,v_0) \times \ver_v(u_0,v_0) \neq 0
+    \).
+
+    Det är samma sak som att vektorerna inte är parallella. Det är också samma sak 
+    som att de spänner upp ett plan.
+\end{defn}
+\begin{defn}[Tangentplan till en parametriserad yta]
+    Om \(
+        S
+    \) är glatt i en punkt \(
+        (a,b,c) = \ver(u_0,v_0)
+    \) är dess \emph{tangentplan} det plan som går genom \(
+        (a,b,c)
+    \) och innehåller alla tangentvektorer till kurvor i \(
+        S
+    \) som går genom \(
+        (a,b,c)
+    \).
+
+    Tangentplanet har normalvektor \(
+        \ve{n} = \ver_u(u_0,v_0) \times \ver_v(u_0,v_0)
+    \) och om man skriver \(
+        \ve{n} = \lang n_1, n_2, n_3\rang
+    \) så ges tangentplanet av \[
+        n_1(x-a) + n_2(y-b) + n_3(z-c) = 0
+    \] eller ekvivalent \[
+        \ve{n} \sprod \lang x-a, y-b, z-c\rang = 0.
+    \]
+
+    Härledningen är lik den för tangentplanet av en nivåyta, den finns också
+    på Canvas.
+\end{defn}
+
+Om \(
+    S
+\) är grafen \(
+    z = f(x,y)
+\) får vi samma formel som tidigare för tangentplanet, eftersom om \(
+    \ver(x,y) = \lang x,y,f(x,y)\rang 
+\) blir \(
+    \ver_x \times \ver_y = 
+    \begin{vmatrix}
+        \uvec{i} & \uvec{j} & \uvec{k} \\ 
+        1 & 0 & f_x \\ 
+        0 & 1 & f_y
+    \end{vmatrix} = \lang -f_x, -f_y, 1 \rang
+\) och \(
+    \ver(a,b) = \lang a, b, f(a,b)\rang
+\) så att tangentplanet blir \(
+    -f_x(a,b) (x-a) - f_y(a,b)(y-b) + 1 \cdot (z - f(a,b)) = 0
+\) vilket är samma sak som \(
+    z = f(a,b) + f_x(a,b)(x-a)+f_y(a,b)(y-b)
+\).
+
+\subsection{Arean av parametriserade ytor (16.6)}
+\begin{sats}[Arean för parametriserade ytor]
+    Arean för en yta \(
+        S
+    \) som parametriseras av \(
+        \ver(u,v)
+    \) där \(
+        (u,v) \in D \subseteq \realn^2
+    \) är \[
+        A = \iint_D \abs{ \ver_u(u,v) \times \ver_v(u,v) } \dd A.
+    \] 
+
+    \begin{proof}
+        Härledning finns i föreläsningsslides.
+    \end{proof}
+\end{sats}
+
+\begin{ex}
+    Om \(
+        S
+    \) är grafen till en funktion \(
+        f
+    \) och \(
+        S
+    \) parametriseras av \(
+        \ver(x,y) = \lang x, y, f(x,y) \rang
+    \) där \(
+        (x,y) \in D
+    \) såg vi att \(
+        \ver_x \times \ver_y = \lang -f_x, -f_y, 1\rang
+    \). Eftersom \(
+        \abs{\ver_x \times \ver_y} = \sqrt{ 1 + f_x^2 + f_y^2 }
+    \) ger det formeln från tidigare som säger att arean är \(
+        A = \iint_D \sqrt{1 + f_x^2 + f_y^2} \dd A
+    \).
+\end{ex}
+
+\begin{ex}
+    Låt \(
+        S
+    \) vara rotationsytan \(
+        \ver(u,v) = \lang g(u) \cos v, g(u) \sin v, u\rang
+    \) där \(
+        (u,v) \in D = [a,b] \times [0,2\pi]
+    \). 
+
+    Då kan vi räkna fram (finns i föreläsningsanteckningar på Canvas) att arean 
+    av \(
+        S
+    \) är \(
+        A = 2\pi \int_a^b g(u) \sqrt{1+g'(u)^2} \dd u
+    \).
+
+    Den formeln finns i avsnitt 8.2 där den härleds på ett annat sätt.
+\end{ex}
+
+\end{document}
