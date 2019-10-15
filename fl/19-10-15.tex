@@ -1,0 +1,261 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-10-15}
+
+\subsection{Ytintegraler av funktioner (16.7)}
+På ett liknande sätt som för kurvintegraler av funktioner definierar vi 
+ytintegraler av funktioner som gränsvärden av Riemannsummor \(
+    \sum_{i=1}^m \sum_{j=1}^n f(\ver(u_{ij}^*, v_{ij}^*)) \text{area}(S_{ij})
+\) och med liknande härledning som för arean fås följande formel för ytintegralen
+av en funktion:
+
+\begin{sats}[Ytintegraler av funktioner]
+    Låt \(
+        f
+    \) vara definierad på någon yta \(
+        s
+    \) som parametriseras av \(
+        \ver(u,v)
+    \), \(
+        (u,v) \in D
+    \). Då är ytintegralen av \(
+        f
+    \) över \(
+        S
+    \) \[
+        \iint_S f(x,y,z) \dd S = \iint_D f(\ver(u,v)) 
+            \abs{\ver_u(u,v) \times \ver_v(u,v)} \dd A.
+    \] 
+    Kort skriver vi att \(
+        \dd S = \abs{\ver_u \times \ver_v} \dd A
+    \).
+\end{sats}
+
+\begin{sats}[Massa och masscentrum för en yta]
+    Om en yta \(
+        S
+    \) har densitet \(
+        \rho\xyz 
+    \) är dess massa \(
+        m = \iint_S \rho\xyz \dd S
+    \) och dess masscentrum \(
+        (\overline{x}, \overline{y}, \overline{z}) = (\frac{M_x}{x}, \frac{M_y}{y}, \frac{M_z}{z} )
+    \) där \(
+        M_x = \iint_S x \rho\xyz \dd S
+    \).
+\end{sats}
+
+\subsection{Flödesintegraler (16.7)}
+Vi vill definiera ytintegralen för ett vektorfält \(
+    \vef 
+\) över en yta \(
+    S
+\) så att det ger flöde, d.v.s.\ om \(
+    \vef
+\) är ett hastighetsfält för exempelvis en vätska är flödet volymen av all vätska
+som passerar \(
+    S
+\) per tidsenhet. 
+
+\subsection{Orientering av ytor}
+Möbiusbandet är en speciell yta som fås genom att ta en remsa, vrida ett halvt 
+varv och sätta ihop. Den har bara en sida vilket är coolt. 
+Flödet beror på riktningen som man passerar ytan, alltså måste man ha en fram-
+och en baksida eller en ut- och en insida, men det finns ju då inte på ett 
+Möbiusband. 
+
+\begin{påm}
+    Om \(
+        S
+    \) är en yta som parametriseras av \(
+        \ver(u,v)
+    \) är \(
+        \ve{n} = \frac{\ver_u(u,v) \times \ver_v(u,v)}{\abs{\ver_u(u,v) \times \ver_v(u,v)}} 
+    \) en enhetsnormalvektor till tangentplanet till \(
+        S
+    \) i \(
+        \ver(u,v)
+    \).
+\end{påm}
+
+Varje tangentplan har två enhetsnormalvektorer \(
+    \pm \ve{n}
+\) som pekar åt motsatta håll. 
+\begin{defn}[Orienterade ytor]
+    En yta sägs vara \emph{orienterad} om man för varje \(
+        \xyz
+    \) på \(
+        S
+    \) kan välja en enhetsnormalvektor \(
+        \ve{n}\xyz
+    \) så att \(
+        \ve{n}
+    \) varierar kontinuerligt på \(
+        S
+    \). \(
+        \ve{n}
+    \) kallas för en \emph{orientering} av \(
+        S
+    \).
+\end{defn}
+
+\begin{ex}
+    Ett Möbiusband är inte en orienterad yta.
+\end{ex}
+
+\begin{sats}[Orientering för en yta]
+    Om \(
+        S
+    \) är en glatt orienterad yta som parametriseras av \(
+        \ver(u,v)
+    \) är \(
+        \ve{n} = \frac{\ver_u \times \ver_v}{\abs{\ver_u\times\ver_v}} 
+    \) en orientering av \(
+        S
+    \).
+\end{sats}
+
+Om \(
+    S
+\) är grafen \(
+    z = f(x,y)
+\) kan den orienteras genom att ta orienteringen som pekar uppåt i positiv \(
+    z
+\)-riktning. Om \(
+    S
+\) parametriseras av \(
+    \ver(x,y) = \lang x,y,f(x,y)\rang
+\) är den orienteringen \(
+    \ve{n} = \frac{\ver_x\times\ver_y}{\abs{\ver_x\times\ver_y}} 
+        = \frac{\lang -f_x, -f_y, 1\rang}{\sqrt{1 + f_x^2 +f_y^2}}
+\).
+
+\subsection{Flöde genom en yta}
+\begin{sats}[Flöde genom en yta]
+    Om \(
+        S
+    \) är en orienterad yta med orientering \(
+        \ve{n}\xyz
+    \) och \(
+        \ve{v}\xyz
+    \) är ett hastighetsfält härleder vi via lämpliga Riemannsummor där \(
+        S
+    \) approximeras med rektanglar (finns i 16.7 i boken) att \emph{flödet} genom \(
+        S
+    \) är \[
+        \iint_S \ve{v} \sprod \ve{n} \dd S.
+    \]
+\end{sats}
+
+\begin{sats}[Ytintegralen av ett vektorfält över en yta]
+    Låt \(
+        \vef
+    \) vara ett vektorfält på ytan \(
+        S
+    \) som har orientering \(
+        \ve{n}
+    \). Då är \emph{ytintegralen} \[
+        \iint_S \vef \sprod \dd \ve{S} = \iint_s \vef \sprod \ve{n} \dd S
+    \] 
+\end{sats}
+
+Ytintegralen kallas också för \emph{flödesintegral} (flux integral) och dess 
+värde kallas \emph{flödet av \(
+    \vef
+\) genom \(
+    S
+\)} eftersom det är vad ytintegralen ger när \(
+    \vef
+\) är ett hastighetsfält.
+
+\begin{sats}[Direkt formel för flödesintegraler]
+    Låt \(
+        S
+    \) vara en glatt orienterad yta som parametriseras av \(
+        \ver(u,v)
+    \), \(
+        (u,v) \in D
+    \). 
+    \begin{påm}
+        \(
+            \iint_S f \dd S = \iint_D f \abs{\ver_u \times \ver_v} \dd A
+        \) 
+    \end{påm}
+
+    \begin{påm}
+        \(
+            \ven = \frac{\ver_u \times \ver_v}{\abs{\ver_u \times \ver_v}}
+        \) ger en orientering av \(
+            S
+        \).
+    \end{påm}
+
+    Med orienteringen ovan blir \(
+        \iint_S \vef \sprod \dd \ve{S} = \iint_S f \sprod \ven \dd S 
+            = \iint_D \vef \sprod \frac{\ver_u \times \ver_v}{\abs{\ver_u \times \ver_v}} 
+                \abs{\ver_u \times \ver_v} \dd A 
+            = \iint_D \vef \sprod (\ver_u \times \ver_v) \dd A
+    \). 
+
+    Formeln gäller också med motsatt orientering om man sätter ett minustecken 
+    framför. 
+
+    Kort säger vi att \(
+        \dd \ve{S} = \ver_u \times \ver_v \dd A
+    \).
+\end{sats}
+
+\begin{ex}
+    Beräkna flödet av vektorfältet \(
+        \vef = \lang zx, zy, 0\rang
+    \) genom halvcylindern \(
+        \ver(u,v) = \lang \cos u, \sin u, v \rang
+    \) där \(
+        (u,v) \in D = \qty[ -\frac{\pi}{2} , \frac{\pi}{2}  ] \times \qty[ 0,1 ]
+    \) och halvcylindern är orienterad i positiv \(
+        x
+    \)-riktning. 
+
+    För att beräkna det måste vi först räkna ut \(
+        \ver_u \times \ver_v = 
+        \begin{vmatrix}
+            \uvec{i} & \uvec{j} & \uvec{k} \\ 
+            -\sin u & \cos u & 0 \\ 
+            0 & 0 & 1
+        \end{vmatrix}
+        = \lang \cos u, \sin u, 0 \rang 
+    \).
+
+    Om \(
+        \frac{-\pi}{2} \leq u \leq \frac{\pi}{2} 
+    \) är \(
+        \cos u \geq 0
+    \), alltså pekar den här i positiv \(
+        x
+    \)-riktning, så den har orienteringen vi ville ha.
+
+    \(
+        \vef(\ver(u,v)) = \vef(\cos u, \sin u, v) 
+            = \lang v \cos u, v \sin u, 0 \rang
+    \).
+
+    \(
+        \vef(\ver(u,v)) \sprod (\ver_u \times \ver_v) 
+            = \lang v \cos u, v \sin u, 0\rang \sprod \lang \cos u, \sin u, v \rang
+            = v ( \cos^2 u + \sin^2 u)
+            = v
+    \).
+
+    Alltså är flödet \(
+        \iint_S \vef \sprod \dd \ve{S} 
+            = \iint_D \vef(\ver(u,v)) \sprod (\ver_u \times \ver_v) \dd A 
+            = \int_0^1 \int_\frac{-\pi}{2}^\frac{\pi}{2} v \dd u \dd v
+            = \cdots = \frac{\pi}{2} 
+    \).
+\end{ex}
+
+\end{document}
