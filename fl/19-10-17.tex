@@ -1,0 +1,280 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-10-17}
+
+\subsection{Divergens av ett vektorfält och flöde genom kurvor}
+\begin{defn}[Flödet genom en sluten kurva]
+    Anta att \(
+        C
+    \) är en enkel, sluten, positivt orienterad kurva som begränsar ett område \(
+        D \subseteq \realn^2
+    \) och att \(
+        C
+    \) parametriseras av \(
+        \ver(t) = \lang x(t), y(t)\rang
+    \).
+
+    Då kan man visa att \(
+        \ven = \frac{\lang y'(t), -x'(t)\rang}{\abs{\ver'(t)}}
+    \) är en enhetsnormalvektor till tangentlinjen som pekar ut från \(
+        D
+    \). (\(
+        \ven
+    \) fås från \(
+        \ver'
+    \) genom att rotera \(
+        \SI{-90}{\degree}
+    \) och sedan normalisera.)
+
+    Som för ytor definieras flödet av \(
+        \vef = \lang P, Q \rang 
+    \) genom \(
+        C
+    \) som \(
+        \int_C \vef \sprod \ven \dd s
+    \). 
+\end{defn}
+
+Vi vill nu härleda en smidigare formel för flödet som en dubbelintegral över \(
+    D
+\).
+
+\begin{påm}[Kurvintegraler av funktioner]
+    Kurvintegralen av en funktion \(
+        f
+    \) över en kurva \(
+        C
+    \) är \(
+        \int_C f \dd s = \int_C f \abs{\ver'(t)}\dd t
+    \).
+\end{påm}
+
+\begin{påm}[Kurvintegraler av vektorfält]
+    Kurvintegralen av ett vektorfält \(
+        \vef  = \lang P, Q \rang
+    \) över en kurva \(
+        C
+    \) är \(
+        \int_C \vef \sprod \dd \ver = \int_C P \dd x + Q \dd y
+    \) där \(
+        \dd x = x'(t) \dd t 
+    \) och \(
+        \dd y = y'(t) \dd t
+    \).
+\end{påm}
+
+\begin{påm}[Greens sats]
+    \(
+        \int_C P \dd x + Q \dd y = \iint_D \pdv{Q}{x}-\pdv{P}{y} \dd A
+    \).
+\end{påm}
+
+Flödet ovan blir då \(
+    \int_C \vef \sprod \ven \dd s = \frac{\int_a^b P \cdot y' - Q \cdot x'}{\abs{\ver'}} \cdot \abs{\ver'}\dd t
+        = \int_a^b P y' - Qx' \dd t
+        = \int_C -Q \dd x + P \dd y
+        = \iint_D \pdv{P}{x}+\pdv{Q}{y}\dd A
+\). Funktionen innanför återkommer, så vi ger det ett namn.
+
+\begin{defn}[Divergens av ett vektorfält]
+    För \(
+        \vef = \lang P,Q\rang 
+    \) i \(
+        \realn^2
+    \) är \emph{divergensen} av \(
+        \vef
+    \) \(
+        \text{div } F = \div{\vef} = \pdv{P}{x}+\pdv{Q}{y}
+    \).
+
+    För \(
+        \vef = \lang P,Q,R\rang 
+    \) i \(
+        \realn^3
+    \) definierar vi \emph{divergensen} av \(
+        \vef
+    \) som \(
+        \text{div } F = \div{\vef} = \pdv{P}{x}+\pdv{Q}{y} + \pdv{R}{z}
+    \).
+\end{defn}
+
+Då skrivs beräkningen innan definitionen som följer:
+
+\begin{sats}[Divergenssatsen för kurvor]
+    \[
+        \int_C \vef \sprod \ven \dd s = \iint_D \div{\vef} \dd A
+    \] 
+\end{sats}
+
+\subsection{Divergenssatsen för ytor}
+\begin{defn}[Slutna ytor]
+    \(
+        S
+    \) är en \emph{sluten yta} om den är randen till något begränsat område \(
+        E \subseteq \realn^3
+    \).
+\end{defn}
+
+Vi antar att \(
+    S
+\) består av ändligt många glatta ytor, t.ex.\ består en kub av sex kvadrater.
+
+\begin{defn}
+    En sluten yta \(
+        S
+    \) är \emph{positivt orienterad} om dess orientering pekar ut från området \(
+        E
+    \) den begränsar.
+\end{defn}
+
+\begin{sats}[Divergenssatsen]
+    Låt \(
+        E \subseteq \realn^3
+    \) vara ett begränsat område med rand \(
+        S
+    \). Anta att \(
+        S
+    \) är positivt orienterad och att den består av ändligt många glatta ytor. 
+    Anta också att \(
+        \vef
+    \) är ett vektorfält på \(
+        E
+    \) med kontinuerliga partiella derivator på \(
+        E
+    \). 
+
+    Då är \[
+        \iint_S \vef \sprod \dd \ve{S} = \iiint_E \div{\vef} \dd V.
+    \] 
+
+    Detta motsvarar fallet med kurvor eftersom \(
+        \iint_S \vef \sprod \dd \ve{S} = \iint_S \vef \sprod \ven \dd S
+    \) 
+
+    \begin{proof}
+        Vi visar det i ett specialfall. Beviset i bokens 16.9 bygger på samma idé
+        men är lite mer allmänt.
+
+        Låt \(
+            E = [a,b] \crossproduct [c,d] \crossproduct [e,f]
+        \) och anta att \(
+            \vef = \lang 0,0,R\rang
+        \).
+
+        Då följer divergenssatsen från vanlig upprepad integration:
+
+        Låt \(
+            D = [a,b] \cprod [c,d]
+        \) så att \(
+            E = D \cprod [e,f]
+        \).
+
+        Då är \(
+            \div{\vef} = \pdv{R}{z}
+        \) och därmed 
+        \begin{align*}
+            \iiint_E \div{\vef} \dd V &= \iint_D \int_e^f \pdv{R}{z} \dd z \dd A \\
+                &= \iint_D \qty[R]_e^f \dd A \\
+                &= \iint_D R(x,y,f) \dd A - \iint_D R(x,y,e) \dd A.
+        \end{align*}
+
+        Vi jämför nu detta med ytintegralerna i vänsterledet i divergenssatsen.
+        Randen \(
+            S
+        \) till \(
+            E
+        \) består av sex stycken rektanglar i och med att \(
+            E
+        \) är ett rätblock. Normalvektorerna behöver peka åt olika håll för att \(
+            E
+        \) ska vara positivt orienterad. Toppen av rätblocket \(
+            S_1
+        \) (där \(
+            z = f
+        \)) kan parametriseras av \(
+            \ver_1(x,y) = \lang x,y,f\rang
+        \) där \(
+            (x,y) \in D
+        \) och dess normalvektor är \(
+            \ven_1 = \lang 0,0,1\rang
+        \).
+
+        Då blir \(
+            \iint_{S_1} \vef \sprod \dd \ve{S} = \iint_D \vef(\ver_1(x,y)) \sprod \ven_1 \dd A
+                = \iint_D \lang 0,0,R(x,y,f)\rang \sprod \lang 0,0,1\rang \dd A
+                = \iint_D R(x,y,f) \dd A
+        \) vilket ger första integralen i divergenssatsen.
+
+        På samma sätt kan man hantera botten av rätblocket \(
+            S_2
+        \) som ger andra integralen. Minustecknet kommer av att dess normalvektor \(
+            \ven_2 = \lang 0,0,-1\rang
+        \).
+
+        De andra sidorna av kuben kommer inte att ge bidrag eftersom de bara 
+        pekar i \(
+            x
+        \)- eller \(
+            y
+        \)-led så att deras \(
+            z
+        \)-koordinat är \(
+            0
+        \). Då blir skalärprodukten inuti integralerna \(
+            0
+        \).
+
+        För att sammanfatta blir \(
+            \iint_E \div{\vef} \dd V = \iint_{S_1} \vef \sprod \dd \ve{S} 
+                    + \iint_{S_2} \vef \sprod \dd \ve{S} 
+                    + \cdots
+                    + \iint_{S_6} \vef \sprod \dd \ve{S} 
+                = \iint_S \vef \sprod \dd \ve{S}
+        \) vilket visar divergenssatsen i detta specialfallet.
+    \end{proof}
+\end{sats}
+
+\begin{ex}
+    Beräkna flödet av \(
+        \vef = \lang z^2, y^2, x^2 \rang
+    \) ut ur området mellan planen \(
+        x=0
+    \), \(
+        x=1
+    \), \(
+        y=0
+    \), \(
+        y=2
+    \), \(
+        z=0
+    \), \(
+        z=2-2x
+    \).
+
+    Området som begränsas av planen är \(
+        E = \{ \xyz \; \| \; 0 \leq x \leq 1, 0 \leq y \leq 2, 0 \leq z \leq 2-2x \}
+    \). 
+
+    Då får vi att om \(
+        S
+    \) är den positivt orienterade randen till \(
+        E
+    \) så är flödet ut ur \(
+        E
+    \) samma som flödet genom \(
+        S
+    \) vilket är 
+    \begin{align*}
+        \iint_S \vef \sprod \dd \ve{S} &= \iiint_E \div{\vef} \dd V \\
+            &= \iiint_E 2y \dd V \\
+            &= \int_0^1 \int_0^2 \int_0^{2-2x} 2y \dd z \dd y \dd x \\
+            &= \dots \\
+            &= 4
+    \end{align*}
+\end{ex}
+
+\end{document}
