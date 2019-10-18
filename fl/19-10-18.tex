@@ -1,0 +1,206 @@
+\documentclass[a4paper]{article}
+\usepackage{../flpack}
+
+\begin{document}
+
+\providecommand\fname{}
+\renewcommand\fname{19-10-18}
+
+\subsection{Rotation av vektorfält (16.5)}
+\begin{defn}[Rotation (curl) av vektorfält]
+    \emph{Rotationen} av ett vektorfält \(
+        \vef = \lang P,Q,R\rang 
+    \) i \(
+        \realn^3
+    \) är \[
+        \text{rot} \vef = \curl{\vef} = \lang \pdv{R}{y} - \pdv{Q}{z}
+                    , \pdv{P}{z} - \pdv{R}{x} 
+                    , \pdv{Q}{x} - \pdv{P}{y} \rang
+    \] 
+
+    Formeln är kryssprodukten mellan \(
+        \grad
+    \) och \(
+        \vef
+    \). 
+\end{defn}
+
+Rotation används bland annat för att formulera två av Maxwells lagar i 
+elektromagnetism. 
+
+\begin{sats}[Rotation av gradient]
+    Om \(
+        f
+    \) är en funktion med kontinuerliga partiella andraderivator blir \(
+        \curl(\grad{f}) = 
+        \begin{vmatrix}
+            \uvec{i} & \uvec{j} & \uvec{k} \\ 
+            \pdv{x} & \pdv{y} & \pdv{z} \\ 
+            \pdv{f}{x} & \pdv{f}{y} & \pdv{f}{z}
+        \end{vmatrix}
+        = \lang \pdv{f}{y}{z} - \pdv{f}{z}{y}, \pdv{f}{x}{z} - \pdv{f}{z}{x}, \pdv{f}{x}{y} - \pdv{f}{y}{x} \rang
+        = \lang 0,0,0\rang
+    \) enligt Clairauts sats.
+\end{sats}
+
+\begin{sats}
+    Om \(
+        \vef
+    \) är ett vektorfält på \(
+        \realn^3
+    \) vars komponenter har kontinuerliga partiella derivator och \(
+        \curl{\vef} = \lang 0,0,0\rang
+    \) så är \(
+        \vef
+    \) konservativt, d.v.s.\ \(
+        \vef = \grad{f}
+    \) för någon funktion \(
+        f
+    \). 
+
+    Detta gäller mer allmänt på områden i \(
+        \realn^3
+    \) som är enkelt sammanhängande, d.v.s.\ \enquote{utan hål}. Det är mer 
+    invecklat att definiera i tre dimensioner än två, och vi gör det inte här.
+\end{sats}
+
+Vi kan använda en liknande metod som i \(
+    \realn^2
+\) för att hitta en potential.
+
+\begin{ex}
+    Låt \(
+        \vef = \lang z,2y,x+2z\rang
+    \) vara ett konservativt vektorfält. Bestäm en potential till \(
+        \vef
+    \).
+
+    Vi vill alltså lösa \(
+        \left\{\begin{matrix}
+            f_x = z & \text{(i)} \\ 
+            f_y = 2y & \text{(ii)}\\ 
+            f_z = x+2z & \text{(iii)}
+        \end{matrix}\right.
+    \) 
+    
+    En lösning till (i) är \(
+        f_0 = xz
+    \) och utifrån det är den allmänna lösningen \(
+        f = xz + g(y,z)
+    \) (*). Vi sätter in den i (ii) och får \(
+        2y = f_y = \{\text{enligt (*)} \} = \pdv{y} (xz + g(y,z)) = g_y(y,z)
+    \). En lösning för \(
+        g_0
+    \) är \(
+        g_0 = y^z
+    \) och därmed är den allmänna lösningen \(
+        g(y,z) = y^2 + h(z)
+    \). Om vi stoppar in den i (*) fås \(
+        f\xyz = xz + g(y,z) = xz + y^2 + h(z)
+    \) (**). Om vi sätter in det i (iii) får vi \(
+        x+2z = f_z = \pdv{z}(xz+y^2+h(z))
+    \) och därmed \(
+        x + 2z = x + h'(z) 
+            \implies h'(z) = 2z
+            \implies h(z) = z^2 + C
+    \). Då får vi genom att gå tillbaka till (**) att \(
+        f\xyz = xz+g(yz) = xz + y^2 + h(z) = xz+y^2+z^2 + C
+    \) vilket är en potential till \(
+        \vef
+    \), vilket man vanligtvis bör kontrollera. 
+\end{ex}
+
+\subsection{Stokes sats}
+\begin{defn}[Positivt orienterad rand till en yta i \(\realn^3\)]
+    Låt \(
+        S 
+    \) vara en yta i \(
+        \realn^3
+    \) som parametriseras av \(
+        \ver(u,v)
+    \) där \(
+        (u,v) \in D
+    \). Randen \(
+        \partial S
+    \) till ytan \(
+        S
+    \) är bilden av randen \(
+        \partial D
+    \) till \(
+        D
+    \).
+
+    En orientering \(
+        \ven
+    \) av \(
+        S
+    \) ger en orientering av \(
+        \partial S
+    \) genom att man går moturs längs \(
+        \partial S
+    \) runt \(
+        \ven
+    \). Om \(
+        \partial S
+    \) har den orienteringen så säger man att den är \emph{positivt orienterad}.
+\end{defn}
+
+\begin{sats}[Stokes sats]
+    Låt \(
+        S
+    \) vara en orienterad yta i \(
+        \realn^3
+    \) och anta att dess rand \(
+        C = \partial S
+    \) är en enkel, sluten och positivt orienterad kurva. Låt också \(
+        \vef
+    \) vara ett vektorfält med kontinuerliga partiella derivator. 
+    
+    Då gäller att \[
+        \int_C \vef \sprod \dd \ver = \iint_S (\curl{F}) \sprod \dd \ve{S}.
+    \] 
+\end{sats}
+
+Om ett område \(
+    D \subseteq \realn^2
+\) kan det också ses som en yta \(
+    S = \{ (x,y,0) \; | \; (x,y) \in D \}
+\) i \(
+    \realn^3
+\). I detta fallet är Greens formel för \(
+    D
+\) samma som Stokes sats för \(
+    S
+\). Mer om det i anteckningarna på kurshemsidan. 
+
+\begin{anm}
+    Man ser på liknande sätt som att \(
+        \curl(\grad{\vef}) = 0
+    \) också att \(
+        \div(\curl{\vef}) = 
+    \), d.v.s.\ att \(
+        \ve{G} = \curl{\vef}
+    \) är källfritt.
+
+    Omvänt gäller på \(
+        \realn^3
+    \) eller andra \enquote{lämpliga områden} \(
+        E \subseteq \realn^3
+    \) att om \(
+        \ve{G}
+    \) är källfritt, d.v.s.\ om \(
+        \div{\ve{G}} = 0
+    \) så är \(
+        \ve{G} = \curl{\vef}
+    \) för något vektorfält \(
+        \vef
+    \). 
+    
+    Inom framför allt fysik är det ett vanligt krav/antagande att  
+    vektorfält är källfria, vilket ger relevanta exempel när Stokes sats
+    är tillämpbar och användbar. 
+\end{anm}
+
+
+
+\end{document}
